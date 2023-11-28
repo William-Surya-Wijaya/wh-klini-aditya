@@ -1,0 +1,4 @@
+HOST : williamsuryawijaya.my.id
+DB : williams_latihan_klinik
+USERNAME : williams_latihan_klinik
+PASS : james
