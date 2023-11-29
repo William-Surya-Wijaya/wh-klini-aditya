@@ -6,17 +6,17 @@ function saveUser($value) {
     VALUES ('".$value['nama']."','".$value['username']."','".$value['pass']."')";
     $result = mysqli_query($koneksi,$query); 
     if($result){
-        header("location: ./pages/userIndex.php");
+        header("location: ./route.php?action=user-data");
     }
     else{
         echo"Gagal.";   
     }
 }
 
-function getUser(){
+function getDataUser($value){
     include("koneksi.php");
     $data = mysqli_query($koneksi,"select * from user");
-    return mysqli_fetch_array($data);
+    return $data ;
 }
 
 ?>

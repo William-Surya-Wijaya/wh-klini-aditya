@@ -5,7 +5,7 @@
     <style >
      @font-face {
         font-family: arone;
-        src: url(ARONE.ttf);
+        src: url(./pages/ARONE.ttf);
     }
     ::-webkit-scrollbar{
             width: 5px;
@@ -230,10 +230,8 @@
                 </thead>
                 <tbody id="tableBody">
                     <?php 
-                    include("../koneksi.php");
                     $no = 1;
-                    $data = mysqli_query($koneksi,"select * from user");
-                    while($getData = mysqli_fetch_array($data)){
+                    while($getData = mysqli_fetch_array($result)){
                         ?>
                         <tr>
                             <th width="5%"><?php echo $no++; ?></th>

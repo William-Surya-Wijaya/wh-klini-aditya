@@ -165,7 +165,7 @@
     <div class="body">
             <div class="login-section">
                 <p class="title">Klinik Aditya</p>
-                <form method="post" id="register-form" name="register-form" action="../route.php?action=register-process">
+                <form method="post" id="register-form" name="register-form" action="./route.php?action=register-process">
                     <div class="input-section">
                         <label>Nama</label>
                         <input type="text" id="nama" name="nama">

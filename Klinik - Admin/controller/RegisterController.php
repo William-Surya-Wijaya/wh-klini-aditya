@@ -6,11 +6,12 @@ function registerUser($req){
     }
     saveUser($req);
 }
-    
+
 
 function view($view,$data=[]){
-    extract($data);
-    include_once $view;
+    $result = getDataUser($data);
+    // var_dump($result);
+    include $view;
 }
 
 ?>
