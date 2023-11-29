@@ -6,7 +6,7 @@ function registerUser($req){
     }
     saveUser($req);
 }
-
+    
 
 function view($view,$data=[]){
     extract($data);

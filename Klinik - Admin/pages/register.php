@@ -163,7 +163,6 @@
 </head>
 <body>
     <div class="body">
-        <?=$data?>
             <div class="login-section">
                 <p class="title">Klinik Aditya</p>
                 <form method="post" id="register-form" name="register-form" action="../route.php?action=register-process">
