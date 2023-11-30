@@ -8,12 +8,20 @@ if(isset($_GET['action']) && $_GET['action'] == 'register-process') {
 if(isset($_GET['action']) && $_GET['action'] == 'tambah-user') {
     tambahUser($_POST);
 }
+if(isset($_GET['action']) && $_GET['action'] == 'edit-user') {
+    modifyUser($_POST);
+}
 
 if(isset($_GET['action']) && $_GET['action'] == 'register') {
     include('./pages/register.php');
 }
 if(isset($_GET['action']) && $_GET['action'] == 'new-user') {
     include('./pages/tambahUser.php');
+}
+if(isset($_GET['action']) && $_GET['action'] == 'modify-data') {
+    // include('./pages/editData.php');
+    $data = ['id_user'=>'1'];
+    getThisuser('./pages/editData.php',$data);
 }
 if(isset($_GET['action']) && $_GET['action'] == 'user-data') {
     $data = ["page"=>"0"];

@@ -249,7 +249,7 @@
                             <th width="18%"><?php echo $getData['pass']; ?></th>
                             <th width="18%"><?php echo $getData['deleted_at']; ?></th>
                             <th width="10%">Delete</th>
-                            <th width="15%">Edit</th>
+                            <th width="15%"><a href="route.php?action=modify-data">Edit</a></th>
                         </tr>
                     <?php
                     }

@@ -11,6 +11,13 @@ function tambahUser($req){
         header('Location: ./route.php?action=new-user');
     }
     saveUser($req);
+}   
+
+function modifyUser($req){
+    if($req['username']==''){
+        header('Location: ./route.php?action=new-user');
+    }
+    editUser($req);
 }
 
 
@@ -20,4 +27,8 @@ function view($view,$data=[]){
     include $view;
 }
 
+function getThisuser($view, $data=[]){
+    $result = getThisUserData($data);
+    include $view;
+}
 ?>
