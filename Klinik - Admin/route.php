@@ -5,9 +5,15 @@ include("./controller/RegisterController.php");
 if(isset($_GET['action']) && $_GET['action'] == 'register-process') {
     registerUser($_POST);
 }
+if(isset($_GET['action']) && $_GET['action'] == 'tambah-user') {
+    tambahUser($_POST);
+}
 
 if(isset($_GET['action']) && $_GET['action'] == 'register') {
     include('./pages/register.php');
+}
+if(isset($_GET['action']) && $_GET['action'] == 'new-user') {
+    include('./pages/tambahUser.php');
 }
 if(isset($_GET['action']) && $_GET['action'] == 'user-data') {
     $data = ["page"=>"0"];

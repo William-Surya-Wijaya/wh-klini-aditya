@@ -193,6 +193,14 @@
         font-size: 25px;
         color: black;
     }
+    .add-character {
+        align-items: left;
+        /* text-align: center; */
+        /* padding-bottom: 10px; */
+        font-size: 20px;
+        color: black;
+        width: 3%;
+    }
     table td{
         padding: 0.5em 1em;
     }
@@ -208,12 +216,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klink Aditya</title>
+    <title>Klinik Aditya</title>
 </head>
 <body>
     <div class="body">
         <div class="character-table-box" id="characterTable">
             <div class="character-table-title">User Data</div>
+            <a class="add-character" href="route.php?action=new-user">Add</a>
             <table class="character-table" border="1" cellpadding="0" cellspacing="0">
                 <thead>
                         <tr>

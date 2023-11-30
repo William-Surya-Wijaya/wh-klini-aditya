@@ -6,6 +6,12 @@ function registerUser($req){
     }
     saveUser($req);
 }
+function tambahUser($req){
+    if($req['username']==''){
+        header('Location: ./route.php?action=new-user');
+    }
+    saveUser($req);
+}
 
 
 function view($view,$data=[]){
