@@ -206,7 +206,7 @@ font-family: arone;
 <div class="background" ></div>
     <div class="container">
         <div class="register-section">
-            <form  method="POST" name="register-form" id="register-form" action="../proses/proses.php?action=register-proses">
+            <form  method="POST" name="register-form" id="register-form" action="./route.php?action=register-proses">
 
             <div class="form-group">
                     <label for="">Name</label>
