@@ -22,6 +22,15 @@ margin: 0;
 overflow: hidden;
 }
 
+.title{
+  color: black;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
 .background{
 position: fixed;
 top: 0;
@@ -203,8 +212,8 @@ font-family: arone;
     <title>Registrasi</title>
 </head>
 <body>
-<div class="background" ></div>
     <div class="container">
+    <div class="title">Register</div>
         <div class="register-section">
             <form  method="POST" name="register-form" id="register-form" action="./route.php?action=register-proses">
 

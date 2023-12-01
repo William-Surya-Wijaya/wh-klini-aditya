@@ -57,7 +57,7 @@ table{
 }
 table th, td{
     border: 1px solid white;
-    padding: 10px;
+    padding: 5px;
 }
 
 </style>
