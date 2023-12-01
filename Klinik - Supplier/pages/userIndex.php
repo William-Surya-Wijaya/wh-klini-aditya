@@ -52,6 +52,12 @@ table{
     background-color: 34afb0;
     color: white;
     font-size: 18px;
+    text-align: center;
+    border-collapse: collapse;
+}
+table th, td{
+    border: 1px solid white;
+    padding: 10px;
 }
 
 </style>
@@ -75,12 +81,32 @@ table{
         </div>
        
             <table >
+                <tr>
                 <th>No</th>
                 <th>Nama</th>
                 <th>Username</th>
-                <th>Role</th>
+                <th>Password</th>
+                <th>Last Modified</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                </tr>
+            <?php
+                include 'koneksi.php';
+                $no = 1;
+                while($db = mysqli_fetch_array($result)){
+                    ?>
+                        <tr>
+                            <td><?php echo $no++;?></td>
+                            <td><?php echo $db ['nama'];?></td>
+                            <td><?php echo $db ['username'];?></td>
+                            <td><?php echo $db ['pass'];?></td>
+                            <td></td>
+                            <td><a href="edit.php">Edit</a></td>
+                            <td><a href="delete.php">Delete</a></td>
+                        </tr>
+            <?php
+                }
+            ?>
             </table>
 
     </div>
