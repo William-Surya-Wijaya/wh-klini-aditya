@@ -208,6 +208,14 @@
     .tButton {
         cursor: pointer;
     }
+    button{
+        text-decoration: none;
+        color: black;
+        border: 2px solid rgba(255, 255, 255, 0.199);
+        background-color: white;
+        font-weight: 600;
+        cursor: pointer ;
+    }
     
     
 </style>
@@ -248,14 +256,13 @@
                             <th width="20%"><?php echo $getData['username']; ?></th>
                             <th width="18%"><?php echo $getData['pass']; ?></th>
                             <th width="18%"><?php echo $getData['deleted_at']; ?></th>
-                            <th width="10%">Delete</th>
-                            <th width="15%"><a href="route.php?action=modify-data">Edit</a></th>
+                            <th width="10%"><button onclick="deleteData('<?php echo $getData['id_user']; ?>')">Delete</button></th>
+                            <th width="15%"><button onclick="modifyData('<?php echo $getData['id_user']; ?>')">Edit</button></th>
                         </tr>
                     <?php
                     }
                     ?>
                     
-                    ?>
                 </tbody>
             </table>
             </div>
@@ -270,7 +277,7 @@
 <script>
     const characterTable = document.getElementById('tableBody');
     let tableIndex = 1;
-    function addCharacter(number, name, username, kata_sandi, last_modified, delete, modify){
+    function addCharacter(number, name, username, kata_sandi, last_modified, deleteF, modify){
         const newRow = document.createElement('tr');
         const newCol = document.createElement('td');
         newCol.innerHTML = number;
@@ -344,7 +351,14 @@
         characterTable.appendChild(newRow);
     }
     
-
+    function modifyData(id){
+       location.href="./route.php?action=modify-data&id=" + id;
+        // alert('error'); 
+    }
+    function deleteData(id){
+       location.href="./route.php?action=delete-data&id=" + id;
+        // alert('error'); 
+    }
     
 </script>
 <?php 

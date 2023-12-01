@@ -26,9 +26,12 @@ function editUser($value) {
 
 
 
+
 function getDataUser($value){
     include("koneksi.php");
     $data = mysqli_query($koneksi,"select * from user");
+    // $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
+    // $data = mysqli_query($koneksi,"select * from user where deleted_at is not null");
     return $data ;
 }
 
@@ -37,5 +40,17 @@ function getThisUserData($value){
     // var_dump($value['id_user']);
     $data = mysqli_query($koneksi,"select * from user where id_user='".$value['id_user']."'");
     return $data;
+}
+function deleteThisUserData($value){
+    include("koneksi.php");
+    // var_dump($value['id_user']);
+    $data = mysqli_query($koneksi,"UPDATE user SET deleted_at = NOW() WHERE id_user='".$value["id_user"]."'");
+    // var_dump($data); die();
+    if($data){
+        header("location: ./route.php?action=user-data");
+    }
+    else{
+        echo"Gagal.";   
+    };
 }
 ?>
