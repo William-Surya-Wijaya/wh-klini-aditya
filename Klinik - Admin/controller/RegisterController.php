@@ -23,7 +23,9 @@ function modifyUser($req){
 
 
 function view($view,$data=[]){
-    $result = getDataUser($data);        
+    $result = getPageData($data["page"]);
+    $jumlahhalaman = pageNum();
+    $halamansekarang = $data["page"];
     // var_dump($result);   
     include $view;
 }

@@ -29,8 +29,8 @@ function editUser($value) {
 
 function getDataUser($value){
     include("koneksi.php");
-    $data = mysqli_query($koneksi,"select * from user");
-    // $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
+    // $data = mysqli_query($koneksi,"select * from user");
+    $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
     // $data = mysqli_query($koneksi,"select * from user where deleted_at is not null");
     return $data ;
 }
@@ -52,5 +52,30 @@ function deleteThisUserData($value){
     else{
         echo"Gagal.";   
     };
+
+}
+
+function getPageData($halaman){
+    include("koneksi.php");
+    // $mulai = pageData($halaman);
+    $data = mysqli_query($koneksi,"select * from user where deleted_at is null limit ".($halaman*10).", 10");
+    return $data;
+}
+function pageData($halaman){
+    $halaman = 5;
+    $page = isset($_GET["halaman"])?(int)$_GET["halaman"]: 1;
+    $mulai = ($page>1)?($page * $halaman)-$halaman :0;
+    return $mulai;
+    
+}
+
+function pageNum(){
+    include("koneksi.php");
+    $result = mysqli_query($koneksi, "Select count(*) from user where deleted_at is null");
+    $total = mysqli_num_rows($result);
+    $pages = ceil($total/10);
+    return $pages;
+
+
 }
 ?>

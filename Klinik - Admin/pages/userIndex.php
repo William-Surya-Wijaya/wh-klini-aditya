@@ -39,6 +39,7 @@
     a {
         text-decoration: none;
         color: black;
+        width: 3%;
     }
     .login-section {
         display: flex;
@@ -216,7 +217,13 @@
         font-weight: 600;
         cursor: pointer ;
     }
-    
+    p {
+        color: black;
+    }
+
+    .page {
+        justify-content: space-between;
+    }
     
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -260,11 +267,24 @@
                             <th width="15%"><button onclick="modifyData('<?php echo $getData['id_user']; ?>')">Edit</button></th>
                         </tr>
                     <?php
-                    }
+                    };
                     ?>
                     
                 </tbody>
             </table>
+            <div class="page">
+                <p>Halaman Sekarang: <?=$halamansekarang+1 ?> </p>
+                <p class="page">Page</p>
+                <?php 
+                if (isset($jumlahhalaman)) {
+                    for($i=0; $i<=$jumlahhalaman;  $i++){
+                    ?><a href='./route.php?action=user-data&halaman=<?=$i?>'><?=$i+1?></a> <?php
+                    }
+                } else {
+                    echo "Error ";
+                }
+                    ?>
+            </div>
             </div>
 
         </div>
