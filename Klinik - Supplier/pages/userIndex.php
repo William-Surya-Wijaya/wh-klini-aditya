@@ -21,21 +21,31 @@ margin: 0;
     padding-bottom: 35px;
 }
 .add{
+    position: relative;
+    left:8%;
+}
+
+.add-button{
     border: none;
     background-color: white;
-    left: 8%;
-    position: relative;
     color: 34afb0;
     font-size: 17px;
 }
+.add-button:hover {
+    background-color: black;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
 .text-input{
     border-radius: 8px;
     position: relative;
-    left: 75%;
+    left: 73%;
 }
 .search{
     position: relative;
-    left: 76%;
+    left: 75%;
     border: none;
     background-color: white;
     color: 34afb0;
@@ -75,7 +85,9 @@ table th, td{
     <div class = "container">
         <div class="title"><strong>USER DATA</strong></div>
         <div class="section">
-            <button class="add" id="add-button" ><strong>ADD</strong></button>
+        <a class="add" href="./route.php?action=addUser">
+            <button class="add-button"><strong>ADD</strong></button>
+        </a>
             <input type="text" class ="text-input" placeholder="username">
             <button class="search" id="search-button"><strong>SEARCH</strong></button>
         </div>
