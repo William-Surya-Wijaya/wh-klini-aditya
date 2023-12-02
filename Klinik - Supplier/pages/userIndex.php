@@ -70,6 +70,18 @@ table th, td{
     padding: 5px;
 }
 
+button{
+    background-color: 34afb0;
+    border: none;
+    color: white;
+}
+button:hover{
+    border-bottom: 1px solid black;
+    transition: transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+}
+
 </style>
 
 
@@ -113,12 +125,17 @@ table th, td{
                             <td><?php echo $db ['username'];?></td>
                             <td><?php echo $db ['pass'];?></td>
                             <td></td>
-                            <td><a href="edit.php">Edit</a></td>
-                            <td><a href="delete.php">Delete</a></td>
+                            <td><button onclick="modifyData('<?php echo $db ['id_user']?>');">Edit</button></td>
+                            <td><button>Delete</button></td>
                         </tr>
             <?php
                 }
             ?>
+            <script>
+                function modifyData(id){
+                    location.href="./route.php?action=editUser&id="+id;
+            }
+            </script>
             </table>
 
     </div>

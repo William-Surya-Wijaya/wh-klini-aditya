@@ -22,4 +22,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'tambah-data'){
 if(isset($_GET['action']) && $_GET['action'] == 'addUser'){
     include("./pages/tambahUser.php");
 }
+
+if (isset($_GET['action']) && $_GET['action'] == 'edit-data'){
+    editUser($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'editUser'){
+    $Ed = ['id_user' => $_GET ['id']];
+    tampilData('./pages/editUser.php', $Ed);
+}
 ?>

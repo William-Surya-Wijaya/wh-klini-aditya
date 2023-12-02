@@ -28,4 +28,21 @@ function tambahUser($REQ){
     saveUser($REQ);
 
 }
+
+function editUser($REQ){
+    if($REQ ['name'] == ''){
+        header('location :./route.php?action = edit-data');
+    }else if($REQ ['username'] == ''){
+        header('location :./route.php?action = edit-data');
+    }else if($REQ ['password'] == ''){
+        header('location :./route.php?action = edit-data');
+    }
+    editData($REQ);
+}
+
+
+function tampilData($view, $id = []){
+    $result = getidUser($id);
+    include $view;
+}
 ?>
