@@ -33,4 +33,17 @@ function editData($user){
         echo 'gagal';
     }
 }
+
+function deleteData($id) {
+    include('koneksi.php');
+    $query = "DELETE FROM user WHERE id_user = '$id'";
+    $result = mysqli_query($koneksi, $query);
+
+    if ($result) {
+        header('location: ./route.php?action=user-data');
+    } else {
+        echo 'gagal';
+    }
+}
+
 ?>

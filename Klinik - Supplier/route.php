@@ -31,4 +31,10 @@ if(isset($_GET['action']) && $_GET['action'] == 'editUser'){
     $Ed = ['id_user' => $_GET ['id']];
     tampilData('./pages/editUser.php', $Ed);
 }
+
+if (isset($_GET['action']) && $_GET['action'] == 'deleteUser') {
+    $idToDelete = $_GET['id'];
+    deleteData($idToDelete);
+}
+
 ?>

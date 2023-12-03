@@ -92,6 +92,7 @@ button:hover{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class = "container">
@@ -126,7 +127,7 @@ button:hover{
                             <td><?php echo $db ['pass'];?></td>
                             <td></td>
                             <td><button onclick="modifyData('<?php echo $db ['id_user']?>');">Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td><button onclick="deleteData('<?php echo $db['id_user']?>');">Delete</button></td>
                         </tr>
             <?php
                 }
@@ -134,6 +135,23 @@ button:hover{
             <script>
                 function modifyData(id){
                     location.href="./route.php?action=editUser&id="+id;
+            }
+
+                function deleteData(id) {
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Anda tidak akan dapat mengembalikan data ini!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href = "./route.php?action=deleteUser&id=" + id;
+                    }
+                });
             }
             </script>
             </table>
