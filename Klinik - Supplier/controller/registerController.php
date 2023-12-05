@@ -13,7 +13,9 @@ function registerUser($REQ){
 }
 
 function view($view, $data = []){
-    $result = getdataUser($data);
+    $result = page_data($data);
+    $halaman = pagination($data);
+    $number = $data['halaman'];
     include $view;
 }
 
@@ -45,4 +47,6 @@ function tampilData($view, $id = []){
     $result = getidUser($id);
     include $view;
 }
+
+
 ?>

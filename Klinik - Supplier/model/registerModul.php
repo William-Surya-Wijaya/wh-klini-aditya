@@ -13,7 +13,7 @@ function saveUser($user){
 
 function getdataUser($value){
     include('koneksi.php');
-    $data = mysqli_query($koneksi,"SELECT * FROM user");
+    $data = mysqli_query($koneksi,"SELECT * FROM user WHERE deleted_at IS NULL");
     return $data;
 }
 
@@ -36,7 +36,7 @@ function editData($user){
 
 function deleteData($id) {
     include('koneksi.php');
-    $query = "DELETE FROM user WHERE id_user = '$id'";
+    $query = "UPDATE user SET deleted_at = NOW() WHERE id_user = '".$id."'";
     $result = mysqli_query($koneksi, $query);
 
     if ($result) {
@@ -45,5 +45,21 @@ function deleteData($id) {
         echo 'gagal';
     }
 }
+
+function pagination($page)
+{
+    include('koneksi.php');
+    $data = mysqli_query($koneksi, "SELECT count(*) as jumlah_halaman FROM user WHERE deleted_at IS NULL");
+    $pg = ceil(mysqli_fetch_array($data)['jumlah_halaman']/5);
+    return $pg;
+}
+
+function page_data($page){
+    include('koneksi.php');
+    $result = mysqli_query($koneksi, "SELECT * FROM user WHERE deleted_at IS NULL LIMIT ".($page['halaman']*5).",5");
+    return $result;
+}
+
+
 
 ?>

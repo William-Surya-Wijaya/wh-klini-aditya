@@ -79,8 +79,11 @@ button:hover{
     border-bottom: 1px solid black;
     transition: transition: all 0.3s ease-in-out;
     cursor: pointer;
-
 }
+.pagination {
+    margin-top: 20px;
+}
+
 
 </style>
 
@@ -117,7 +120,7 @@ button:hover{
                 </tr>
             <?php
                 include 'koneksi.php';
-                $no = 1;
+                $no = 5 * $number + 1;
                 while($db = mysqli_fetch_array($result)){
                     ?>
                         <tr>
@@ -156,6 +159,17 @@ button:hover{
             </script>
             </table>
 
+<!-- PAGINATION -->
+            <div class = "pagination">
+                <p>Halaman Saat ini : <?= $number + 1?></p>
+                <p>Page : <?php if(isset($halaman)){
+                    for($i = 0; $i < $halaman; $i++){
+                        ?>
+                        <a href="./route.php?action=user-data&halaman=<?=$i?>"><?=$i+1?></a>
+                        <?php
+                    }
+                    }?></p>
+            </div>
     </div>
 </body>
 </html>
