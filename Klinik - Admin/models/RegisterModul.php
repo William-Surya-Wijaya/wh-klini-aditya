@@ -42,16 +42,16 @@ function searchData($value){
 
 
 
-// function getDataUser($value){
-//     include("koneksi.php");
-//     // $data = mysqli_query($koneksi,"select * from user");
-//     // $data = mysqli_query($koneksi,"select * from user where deleted_at is not null");
-//     $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
-//     return $data ;
-// }
+function getDataUser($value){
+    include("koneksi.php");
+    // $data = mysqli_query($koneksi,"select * from user");
+    // $data = mysqli_query($koneksi,"select * from user where deleted_at is not null");
+    $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
+    return $data ;
+}
 
 function getThisUserData($value){
-    include("koneksi.php");
+    include("ko neksi.php");
     // var_dump($value['id_user']);
     $data = mysqli_query($koneksi,"select * from user where id_user='".$value['id_user']."'");
     return $data;
