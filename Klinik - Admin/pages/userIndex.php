@@ -22,6 +22,7 @@
         padding: 0;
         margin: 0;
         font-family: arone ;
+        
     }
     .body {
         display: flex;
@@ -33,6 +34,8 @@
         gap :50px;
         height: 81vh;
         overflow:hidden;
+        background-color: cornflowerblue;
+   
 
     }
 
@@ -51,17 +54,23 @@
     }
     .input-section {
         display: flex;
-        width: 100%;
+        /* width: 20%; */
         font-size: 20px;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: left;
+        /* padding-bottom: 10px; */
         gap: 15px;
         color: black;
     }
-    input[type="text"], select, textarea {
-        background-color: black;
+    .input-section button{
+        background-color: cornflowerblue;
+        border: 2px solid cornflowerblue;
         color: white;
+    }
+    input[type="text"], select, textarea {
+        background-color: white;
+        color: black;
         border: 1px solid black;
         border-radius: 5px;
         padding: 10px 10px 10px 10px;
@@ -104,15 +113,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        background-color: cornflowerblue;
         /* gap :50px; */
-        height: 19vh;
+        height: 11.95vh;
         overflow: hidden;
     }
     .footer-section {
         color: black;
         flex-direction: column;
-        background-color: white;
+        background-color: black;
         display: flex;
         column-gap: 1em;
         font-weight: 800;
@@ -129,7 +138,7 @@
         width: 50px;
         height: 50px;
         animation: spin 1s linear infinite;
-        z-index: 11;
+        z-index: 99 !important;
         position: fixed;
         bottom: 440px;
         align-items: center;
@@ -143,8 +152,8 @@
         position: fixed;
         align-items: center;
         justify-content: center;
-        z-index: 11;
-        transition: all .35s,3s ease-in-out;
+        z-index: 99 !important;
+        transition: all .35s,1.5s ease-in-out;
     }
     .loader-hidden{
         opacity: 0;
@@ -180,27 +189,72 @@
         height: 100%;
         max-height: 100%;
         overflow: auto;
+        z-index: 1;
         /* align-items:     ; */
     }
-    table th {
+
+    .table-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: right;
+        padding-bottom: 10px;
+        width: 100%;
+    }
+    /* form {
+        width: 100%;
+        align-items: right;
+        display: flex;
+
+    } */
+
+    table {
+        z-index: 1;
+    }
+    th {
         padding: 2px 4px;
         color: black;
     }
+    th tr {
+        color: white;
+    }
+
 
     .character-table-title {
+        display: flex;
+        flex-direction: column;
         align-items: center;
         text-align: center;
-        padding-bottom: 10px;
-        font-size: 25px;
         color: black;
     }
+    .character-table {
+        background-color: cornflowerblue;
+    }
+    .table-body{
+        background-color: white;
+    }
+    .table-title {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        font-size: 25px;
+        padding: 10px 20px 10px 20px;
+        border: 2px solid black;
+        border-radius: 20px;
+        color: white;
+        background-color: black;
+    }
     .add-character {
-        align-items: left;
-        /* text-align: center; */
-        /* padding-bottom: 10px; */
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 5px 10px 5px 10px;
         font-size: 20px;
         color: black;
-        width: 3%;
+        /* width: 3%; */
+        border: 1px solid black;
+        border-radius: 10px;
+        justify-content: center;
+        background-color: white;
     }
     table td{
         padding: 0.5em 1em;
@@ -218,11 +272,23 @@
         cursor: pointer ;
     }
     p {
-        color: black;
+        color: white;
+        justify-content: space-between;
     }
 
     .page {
         justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding-top: 5%;
+    }
+
+
+    .page-num {
+        justify-content: space-between;
+    }
+    .page-num a{
+        color: white;
     }
     
 </style>
@@ -234,10 +300,21 @@
     <title>Klinik Aditya</title>
 </head>
 <body>
+    <div class="loader-section" id="loader">
+        <div class="loader"></div>
+        </div> 
     <div class="body">
         <div class="character-table-box" id="characterTable">
-            <div class="character-table-title">User Data</div>
-            <a class="add-character" href="route.php?action=new-user">Add</a>
+            <div class="character-table-title">
+                <p class="table-title">User Data</p>
+            </div>
+            <div class="table-header">
+                <a class="add-character" href="route.php?action=new-user">Add</a>
+                    <div class="input-section"> 
+                        <input type="text" id="search-input" name="search-input" placeholder="Search">
+                        <button  onclick="searchUData()">Search</button>
+                    </div>
+            </div>
             <table class="character-table" border="1" cellpadding="0" cellspacing="0">
                 <thead>
                         <tr>
@@ -252,7 +329,7 @@
                     <?php
                     ?>
                 </thead>
-                <tbody id="tableBody">
+                <tbody id="tableBody" class="table-body">
                     <?php 
                     $no = 1;
                     while($getData = mysqli_fetch_array($result)){
@@ -273,9 +350,9 @@
                 </tbody>
             </table>
             <div class="page">
-                <p>Halaman Sekarang: <?=$halamansekarang+1 ?> </p>
-                <p class="page">Page</p>
-                <?php 
+                <p>Halaman Sekarang: <?=$halamansekarang+1 ?></p>
+                <p >Page</p>
+                <p class="page-num"> <?php 
                 if (isset($jumlahhalaman)) {
                     for($i=0; $i<=$jumlahhalaman;  $i++){
                     ?><a href='./route.php?action=user-data&halaman=<?=$i?>'><?=$i+1?></a> <?php
@@ -283,17 +360,16 @@
                 } else {
                     echo "Error ";
                 }
-                    ?>
+                    ?> </p>
             </div>
             </div>
 
         </div>
-        <!-- <div class="loader-section" id="loader">
-            <div class="loader"></div>
-        </div> -->
+
     </div>
 </div>
 </body>
+<footer></footer>
 <script>
     const characterTable = document.getElementById('tableBody');
     let tableIndex = 1;
@@ -379,7 +455,22 @@
        location.href="./route.php?action=delete-data&id=" + id;
         // alert('error'); 
     }
+    function searchUData(){
+        const nilai_search = document.getElementById("search-input").value;
+        location.href="./route.php?action=user-data&nama=" + nilai_search;
+        // alert('error'); 
+    }
     
+    document.addEventListener("DOMContentLoaded", ()=> {
+        setTimeout(() => {
+            document.querySelector(".loader-section").classList.add("loader-hidden");
+            document.querySelector(".loader-section").addEventListener("transitionend", ()=> {
+                document.body.removeChild(document.querySelector(".loader-section"));
+            
+            }, 300);
+        });
+    });
+
 </script>
 <?php 
 

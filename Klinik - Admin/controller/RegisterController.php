@@ -19,12 +19,19 @@ function modifyUser($req){
     }
     editUser($req);
 }
+function searchUser($req){
+    if($req['nama']==''){
+        header('Location: ./route.php?action=search-data');
+    }
+    searchData($req);
+}
 
 
 
 function view($view,$data=[]){
-    $result = getPageData($data["page"]);
-    $jumlahhalaman = pageNum();
+    // $result = getDataUser($data);        
+    $result = getPageData($data);
+    $jumlahhalaman = pageNum($data);
     $halamansekarang = $data["page"];
     // var_dump($result);   
     include $view;
@@ -37,4 +44,9 @@ function getThisuser($view, $data=[]){
 function deleteThisuser($data=[]){
     deleteThisUserData($data);
 }
+function searchThisuser($data = []) {
+    searchData($data);
+    view('./pages/userIndex.php', $data);
+}
+
 ?>

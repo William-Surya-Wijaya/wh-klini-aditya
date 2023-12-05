@@ -11,6 +11,9 @@ if(isset($_GET['action']) && $_GET['action'] == 'tambah-user') {
 if(isset($_GET['action']) && $_GET['action'] == 'edit-user') {
     modifyUser($_POST);
 }
+if(isset($_GET['action']) && $_GET['action'] == 'search-user') {
+    searchUser($_POST);
+}
 
 
 if(isset($_GET['action']) && $_GET['action'] == 'register') {
@@ -30,9 +33,20 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete-data') {
     deleteThisuser($data);
 }
 if(isset($_GET['action']) && $_GET['action'] == 'user-data') {
-    $data = ["page"=>$_GET["halaman"]];
+    $halaman = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 0;
+    $nama = isset($_GET['nama']) ? $_GET["nama"] : '';
+    $data = ['nama' => $nama,"page" => $halaman];
     view('./pages/userIndex.php', $data);
 }
+// route.php
+
+// ...
+// if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
+//     $data = ["page" => isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 0];
+//     view('./pages/userIndex.php', $data);
+// }
+// ...
+
 
 
 // if(isset($_GET['action']) && $_GET['action'] == 'register') {

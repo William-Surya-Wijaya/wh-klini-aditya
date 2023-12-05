@@ -4,7 +4,7 @@
     <style >
      @font-face {
         font-family: arone;
-        src: url(ARONE.ttf);
+        src: url(./pages/ARONE.ttf);
     }
     * {
         padding: 0;
