@@ -49,4 +49,16 @@ function tampilData($view, $id = []){
 }
 
 
+function searchUser($view, $data) {
+    if (!empty($data['search'])) {
+        $result = searchData($data['search'], $data['halaman']);
+    } else {
+        $result = page_data($data);
+    }
+    $halaman = pagination($data);
+    $number = $data['halaman'];
+    include $view;
+}
+
+
 ?>

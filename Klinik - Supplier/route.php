@@ -32,10 +32,21 @@ if (isset($_GET['action']) && $_GET['action'] == 'deleteUser') {
     deleteData($idToDelete);
 }
 
+// if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
+//     $page = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+//     $data = ["halaman" => $page];
+//     view('./pages/userIndex.php', $data);
+// }
+
 if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
-    $page = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
-    $data = ["halaman" => $page];
-    view('./pages/userIndex.php', $data);
+    $page = isset($_GET['halaman']) ? $_GET['halaman'] : 0;
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $data = ["halaman" => $page, "search" => $search];
+    searchUser('./pages/userIndex.php', $data);
 }
+
+
+
+
 
 ?>

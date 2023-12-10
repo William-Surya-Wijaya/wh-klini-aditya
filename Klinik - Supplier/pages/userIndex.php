@@ -104,8 +104,9 @@ button:hover{
         <a class="add" href="./route.php?action=addUser">
             <button class="add-button"><strong>ADD</strong></button>
         </a>
-            <input type="text" class ="text-input" placeholder="username">
-            <button class="search" id="search-button"><strong>SEARCH</strong></button>
+        <input type="text" id="searchInput" class="text-input" placeholder="Search by username">
+        <button onclick="performSearch()" class="search" id="search-button"><strong>SEARCH</strong></button>
+
         </div>
        
             <table >
@@ -155,7 +156,15 @@ button:hover{
                             location.href = "./route.php?action=deleteUser&id=" + id;
                     }
                 });
+
             }
+
+            function performSearch() {
+                var searchValue = document.getElementById("searchInput").value;
+                location.href = "./route.php?action=user-data&search=" + searchValue;
+            }
+
+            
             </script>
             </table>
 

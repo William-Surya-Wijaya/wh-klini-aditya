@@ -56,10 +56,15 @@ function pagination($page)
 
 function page_data($page){
     include('koneksi.php');
-    $result = mysqli_query($koneksi, "SELECT * FROM user WHERE deleted_at IS NULL LIMIT ".($page['halaman']*5).",5");
+    $result = mysqli_query($koneksi, "   SELECT * FROM user WHERE deleted_at IS NULL LIMIT ".($page['halaman']*5).",5");
     return $result;
 }
 
-
+function searchData($search, $page) {
+    include('koneksi.php');
+    $condition = ($search != '') ? "AND username LIKE '%$search%'" : '';
+    $result = mysqli_query($koneksi, "SELECT * FROM user WHERE deleted_at IS NULL $condition LIMIT " . ($page * 5) . ",5");
+    return $result;
+}
 
 ?>
