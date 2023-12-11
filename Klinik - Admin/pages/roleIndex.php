@@ -212,9 +212,12 @@
     }
     th {
         padding: 2px 4px;
+        /* color: black; */
+    }
+    tr {
         color: black;
     }
-    th tr {
+    .tr-table {
         color: white;
     }
 
@@ -300,9 +303,9 @@
     <title>Klinik Aditya</title>
 </head>
 <body>
-    <!-- <div class="loader-section" id="loader">
+    <div class="loader-section" id="loader">
         <div class="loader"></div>
-        </div>  -->
+        </div> 
     <div class="body">
         <div class="character-table-box" id="characterTable">
             <div class="character-table-title">
@@ -317,7 +320,7 @@
             </div>
             <table class="character-table" border="1" cellpadding="0" cellspacing="0">
                 <thead>
-                        <tr>
+                        <tr class="tr-table">
                             <th width="5%">No</th>
                             <th width="20%">Role</th>
                             <th width="18%">Last Modified</th>

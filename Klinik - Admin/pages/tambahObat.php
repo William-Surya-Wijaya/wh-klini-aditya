@@ -45,7 +45,7 @@
         gap: 15px;
         color: black;
     }
-    input[type="text"], input[type="password"], textarea, select, option {
+    input[type="text"], input[type="password"], textarea {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -164,35 +164,19 @@
 <body>
     <div class="body">
             <div class="login-section">
-                <p class="title">Edit Data</p>
-                <form method="post" id="edit-user" name="edit-user" action="./route.php?action=edit-user">
-                    <div class="input-section"> <?php 
-                    $result = mysqli_fetch_array($result);
-                    ?>
-                        <label>Nama</label>
-                        <input type="hidden" id="id" name="id" value="<?= $result["id_user"] ?>">
-                        <input type="text" id="nama" name="nama" value="<?= $result["nama"] ?>">
-                        <label>Username</label>
-                        <input type="text" id="username" name="username" value="<?= $result["username"] ?>">
-                        <label>Password</label>
-                        <input type="password" id="password" name="pass" value="<?= $result["pass"] ?>">
-                        <label>Role</label>
-                        <select class="role-select" id="role-select" name="role-select">
-                            
-                            <?php 
-                            $id = 1;
-                            $result2 = getRoleSelect($id);
-                            foreach ($result2 as $role) { 
-                            ?>
-                                <option value="<?php echo $role['id_role']; ?>"<?=($role['id_role'] == $result["id_role"])? "selected":'' ?>><?php echo $role['role']; ?></option>
-                            <?php
-                            } 
-                            ?>
-                        </select>
+                <p class="title">Tambah Data</p>
+                <form method="post" id="tambah-obat" name="tambah-obat" action="./route.php?action=tambah-obat">
+                    <div class="input-section">
+                        <label>Nama Obat</label>
+                        <input type="text" id="nama" name="nama">
+                        <label>Harga Obat</label>
+                        <input type="text" id="harga" name="harga">
+                        <label>Stock</label>
+                        <input type="text" id="stock" name="stock">
 
                     </div>
                     <div class="login-button">
-                        <button id="loginclickbutton">Ubah</button>
+                        <button id="loginclickbutton">Tambah</button>
                         <!-- <input type="submit" value="Login"> -->
                     </div> 
                 </form>
@@ -204,13 +188,12 @@
     
 </body>
 <script>
-    const namaInput = document.getElementById('nama');
-    const birthdateInput = document.getElementById('birthdate');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+    const obatInput = document.getElementById('nama');
+    const hargaInput = document.getElementById('harga');
+    const stockInput = document.getElementById('stock');
     const loginButton = document.getElementById('loginclickbutton');
 
-    const formRegister = document.getElementById('edit-user');
+    const formRegister = document.getElementById('tambah-obat');
 
     // if(usernameInput.length < 8){
     //     Swal.fire({
@@ -227,74 +210,52 @@
         var upperCaseLetters = /[A-Z]/g;
         var numbers = /[0-9]/g;
         event.preventDefault();
-        if(namaInput.value==""){
+        if(obatInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi nama terlebih dahulu</a>'
+                footer: '<a href="#">Tolong isi nama obat terlebih dahulu</a>'
             });
         }
-        else if(usernameInput.value==""){
+        else if(!numbers.test(hargaInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi username terlebih dahulu</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan angka</a>'
             });
         }
-        else if(usernameInput.value.length < 8){
+        else if(hargaInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
+                footer: '<a href="#">Tolong isi harga terlebih dahulu</a>'
             });
         }
-        else if(passwordInput.value==""){
+        else if(!numbers.test(stockInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi password anda</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan angka</a>'
             });
         }
-        else if(passwordInput.value.length < 8){
+        else if(stockInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
+                footer: '<a href="#">Tolong isi stock terlebih dahulu</a>'
             });
         }
-        else if(!lowerCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf kecil</a>'
-            });
-        }
-        else if(!upperCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf besar</a>'
-            });
-        }
-        else if(!numbers.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu angka</a>'
-            });
-        }
+        
+        
         else {
             Swal.fire({
                 title: "Success",
-                text: "User berhasil ditambah!",
+                text: "Data Obat berhasil ditambah!",
                 icon: "success"
             });
             formRegister.submit();

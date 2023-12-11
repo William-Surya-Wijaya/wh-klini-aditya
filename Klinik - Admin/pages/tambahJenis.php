@@ -45,7 +45,7 @@
         gap: 15px;
         color: black;
     }
-    input[type="text"], input[type="password"], textarea, select, option {
+    input[type="text"], input[type="password"], textarea {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -164,35 +164,15 @@
 <body>
     <div class="body">
             <div class="login-section">
-                <p class="title">Edit Data</p>
-                <form method="post" id="edit-user" name="edit-user" action="./route.php?action=edit-user">
-                    <div class="input-section"> <?php 
-                    $result = mysqli_fetch_array($result);
-                    ?>
-                        <label>Nama</label>
-                        <input type="hidden" id="id" name="id" value="<?= $result["id_user"] ?>">
-                        <input type="text" id="nama" name="nama" value="<?= $result["nama"] ?>">
-                        <label>Username</label>
-                        <input type="text" id="username" name="username" value="<?= $result["username"] ?>">
-                        <label>Password</label>
-                        <input type="password" id="password" name="pass" value="<?= $result["pass"] ?>">
-                        <label>Role</label>
-                        <select class="role-select" id="role-select" name="role-select">
-                            
-                            <?php 
-                            $id = 1;
-                            $result2 = getRoleSelect($id);
-                            foreach ($result2 as $role) { 
-                            ?>
-                                <option value="<?php echo $role['id_role']; ?>"<?=($role['id_role'] == $result["id_role"])? "selected":'' ?>><?php echo $role['role']; ?></option>
-                            <?php
-                            } 
-                            ?>
-                        </select>
+                <p class="title">Tambah Data</p>
+                <form method="post" id="tambah-jenis" name="tambah-jenis" action="./route.php?action=tambah-jenis">
+                    <div class="input-section">
+                        <label>Jenis</label>
+                        <input type="text" id="jenis" name="jenis">
 
                     </div>
                     <div class="login-button">
-                        <button id="loginclickbutton">Ubah</button>
+                        <button id="loginclickbutton">Tambah</button>
                         <!-- <input type="submit" value="Login"> -->
                     </div> 
                 </form>
@@ -204,13 +184,10 @@
     
 </body>
 <script>
-    const namaInput = document.getElementById('nama');
-    const birthdateInput = document.getElementById('birthdate');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+    const jenisInput = document.getElementById('jenis');
     const loginButton = document.getElementById('loginclickbutton');
 
-    const formRegister = document.getElementById('edit-user');
+    const formRegister = document.getElementById('tambah-jenis');
 
     // if(usernameInput.length < 8){
     //     Swal.fire({
@@ -227,74 +204,27 @@
         var upperCaseLetters = /[A-Z]/g;
         var numbers = /[0-9]/g;
         event.preventDefault();
-        if(namaInput.value==""){
+        if(jenisInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi nama terlebih dahulu</a>'
+                footer: '<a href="#">Tolong isi role terlebih dahulu</a>'
             });
         }
-        else if(usernameInput.value==""){
+        else if(numbers.test(jenisInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi username terlebih dahulu</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan huruf</a>'
             });
         }
-        else if(usernameInput.value.length < 8){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
-            });
-        }
-        else if(passwordInput.value==""){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi password anda</a>'
-            });
-        }
-        else if(passwordInput.value.length < 8){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
-            });
-        }
-        else if(!lowerCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf kecil</a>'
-            });
-        }
-        else if(!upperCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf besar</a>'
-            });
-        }
-        else if(!numbers.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu angka</a>'
-            });
-        }
+        
         else {
             Swal.fire({
                 title: "Success",
-                text: "User berhasil ditambah!",
+                text: "Role berhasil ditambah!",
                 icon: "success"
             });
             formRegister.submit();

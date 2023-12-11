@@ -124,7 +124,7 @@
         align-items: center;
         justify-content: center;
         z-index: 11;
-        transition: all .35s,2s ease-in-out;
+        transition: all .35s,1s ease-in-out;
     }
     .loader-hidden{
         opacity: 0;
@@ -165,26 +165,26 @@
     <div class="body">
             <div class="login-section">
                 <p class="title">Edit Data</p>
-                <form method="post" id="edit-user" name="edit-user" action="./route.php?action=edit-user">
+                <form method="post" id="edit-obat" name="edit-obat" action="./route.php?action=edit-obat">
                     <div class="input-section"> <?php 
                     $result = mysqli_fetch_array($result);
                     ?>
-                        <label>Nama</label>
-                        <input type="hidden" id="id" name="id" value="<?= $result["id_user"] ?>">
-                        <input type="text" id="nama" name="nama" value="<?= $result["nama"] ?>">
-                        <label>Username</label>
-                        <input type="text" id="username" name="username" value="<?= $result["username"] ?>">
-                        <label>Password</label>
-                        <input type="password" id="password" name="pass" value="<?= $result["pass"] ?>">
+                        <label>Nama Obat</label>
+                        <input type="hidden" id="id" name="id" value="<?= $result["id_obat"] ?>">
+                        <input type="text" id="namaObat" name="namaObat" value="<?= $result["nama_obat"] ?>">
+                        <label>Harga Obat</label>
+                        <input type="text" id="hargaObat" name="hargaObat" value="<?= $result["harga_obat"] ?>">
+                        <label>Stock</label>
+                        <input type="text" id="stockObat" name="stockObat" value="<?= $result["stock"] ?>">
                         <label>Role</label>
-                        <select class="role-select" id="role-select" name="role-select">
+                        <select class="jenis-select" id="jenis-select" name="jenis-select">
                             
                             <?php 
                             $id = 1;
-                            $result2 = getRoleSelect($id);
-                            foreach ($result2 as $role) { 
+                            $result2 = getJenisSelect($id);
+                            foreach ($result2 as $jenis) { 
                             ?>
-                                <option value="<?php echo $role['id_role']; ?>"<?=($role['id_role'] == $result["id_role"])? "selected":'' ?>><?php echo $role['role']; ?></option>
+                                <option value="<?php echo $jenis['id_jenis']; ?>"<?=($jenis['id_jenis'] == $result["id_jenis"])? "selected":'' ?>><?php echo $jenis['jenis']; ?></option>
                             <?php
                             } 
                             ?>
@@ -204,97 +204,61 @@
     
 </body>
 <script>
-    const namaInput = document.getElementById('nama');
-    const birthdateInput = document.getElementById('birthdate');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
+    const obatInput = document.getElementById('namaObat');
+    const hargaInput = document.getElementById('hargaObat');
+    const stockInput = document.getElementById('stockObat');
     const loginButton = document.getElementById('loginclickbutton');
 
-    const formRegister = document.getElementById('edit-user');
-
-    // if(usernameInput.length < 8){
-    //     Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: "Something went wrong!",
-    //             footer: '<a href="#">Minimal 8 character!</a>'
-    //         });
-    // }
-
+    const formRegister = document.getElementById('edit-obat');
 
     loginButton.addEventListener('click', ()=>{
         var lowerCaseLetters = /[a-z]/g;
         var upperCaseLetters = /[A-Z]/g;
         var numbers = /[0-9]/g;
-        event.preventDefault();
-        if(namaInput.value==""){
+        if(obatInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi nama terlebih dahulu</a>'
+                footer: '<a href="#">Tolong isi nama obat terlebih dahulu</a>'
             });
         }
-        else if(usernameInput.value==""){
+        else if(!numbers.test(hargaInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi username terlebih dahulu</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan angka</a>'
             });
         }
-        else if(usernameInput.value.length < 8){
+        else if(hargaInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
+                footer: '<a href="#">Tolong isi harga terlebih dahulu</a>'
             });
         }
-        else if(passwordInput.value==""){
+        else if(!numbers.test(stockInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi password anda</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan angka</a>'
             });
         }
-        else if(passwordInput.value.length < 8){
+        else if(stockInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
-            });
-        }
-        else if(!lowerCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf kecil</a>'
-            });
-        }
-        else if(!upperCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf besar</a>'
-            });
-        }
-        else if(!numbers.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu angka</a>'
+                footer: '<a href="#">Tolong isi stock terlebih dahulu</a>'
             });
         }
         else {
             Swal.fire({
                 title: "Success",
-                text: "User berhasil ditambah!",
+                text: "Data Obat berhasil diubah!",
                 icon: "success"
             });
             formRegister.submit();

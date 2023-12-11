@@ -164,20 +164,18 @@
 <body>
     <div class="body">
             <div class="login-section">
-                <p class="title">Klinik Aditya</p>
-                <form method="post" id="register-form" name="register-form" action="./route.php?action=register-process">
-                    <div class="input-section">
-                        <label>Nama</label>
-                        <input type="text" id="nama" name="nama">
-                        <label>Username</label>
-                        <input type="text" id="username" name="username">
-                        <label>Password</label>
-                        <input type="password" id="password" name="pass">
-                        <label>Konfirmasi Password</label>
-                        <input type="password" id="konfirmasipassword" name="konfirmasipassword">
+                <p class="title">Edit Data</p>
+                <form method="post" id="edit-jenis" name="edit-jenis" action="./route.php?action=edit-jenis">
+                    <div class="input-section"> <?php 
+                    $result = mysqli_fetch_array($result);
+                    ?>
+                        <label>Role</label>
+                        <input type="hidden" id="id" name="id" value="<?= $result["id_jenis"] ?>">
+                        <input type="text" id="jenis" name="jenis" value="<?= $result["jenis"] ?>">
+
                     </div>
                     <div class="login-button">
-                        <button id="loginclickbutton">Register</button>
+                        <button id="loginclickbutton">Ubah</button>
                         <!-- <input type="submit" value="Login"> -->
                     </div> 
                 </form>
@@ -189,14 +187,10 @@
     
 </body>
 <script>
-    const namaInput = document.getElementById('nama');
-    const birthdateInput = document.getElementById('birthdate');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const konfirmasipasswordInput = document.getElementById('konfirmasipassword');
+    const jenisInput = document.getElementById('jenis');
     const loginButton = document.getElementById('loginclickbutton');
 
-    const formRegister = document.getElementById('register-form');
+    const formRegister = document.getElementById('edit-jenis');
 
     // if(usernameInput.length < 8){
     //     Swal.fire({
@@ -213,90 +207,27 @@
         var upperCaseLetters = /[A-Z]/g;
         var numbers = /[0-9]/g;
         event.preventDefault();
-        if(namaInput.value==""){
+                if(jenisInput.value==""){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi nama terlebih dahulu</a>'
+                footer: '<a href="#">Tolong isi role terlebih dahulu</a>'
             });
         }
-        else if(usernameInput.value==""){
+        else if(numbers.test(jenisInput.value)){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi username terlebih dahulu</a>'
+                footer: '<a href="#">Hanya boleh diisi dengan huruf</a>'
             });
         }
-        else if(usernameInput.value.length < 8){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
-            });
-        }
-        else if(passwordInput.value==""){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Tolong isi password anda</a>'
-            });
-        }
-        else if(passwordInput.value.length < 8){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Minimal 8 character!</a>'
-            });
-        }
-        else if(!lowerCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf kecil</a>'
-            });
-        }
-        else if(!upperCaseLetters.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu huruf besar</a>'
-            });
-        }
-        else if(!numbers.test(passwordInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Harus memiliki setidaknya satu angka</a>'
-            });
-        }
-        else if(konfirmasipasswordInput.value==""){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Cek kembali konfirmasi password anda</a>'
-            });
-        }
-        else if(konfirmasipasswordInput.value!==passwordInput.value){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Password tidak sesuai</a>'
-            });
-        }
+        
         else {
             Swal.fire({
                 title: "Success",
-                text: "Register Berhasil!",
+                text: "Role berhasil ditambah!",
                 icon: "success"
             });
             formRegister.submit();
@@ -314,12 +245,3 @@
     });
 </script>
 </html>
-
-<?php 
-
-
-
-
-
-
-?>

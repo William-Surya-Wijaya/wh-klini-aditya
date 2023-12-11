@@ -32,7 +32,7 @@
         justify-content: center;
         background-color: white;
         gap :50px;
-        height: 82vh;
+        height: 81vh;
         overflow:hidden;
         background-color: cornflowerblue;
    
@@ -85,7 +85,30 @@
         align-items: center;
         gap: 30px;
     }
+    /* button:hover {
+        color: white;
+        background-color: transparent;
+        border: 2px solid white;
+        
+    }
+    button{
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: black;
+        padding: 5px 15px 5px 15px;
+        border: 2px solid rgba(255, 255, 255, 0.199);
+        width: 100%;
+        transition: all .5s ease-in-out;
+    } */
+    /* nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    } */
     footer{
         display: flex;
         align-items: center;
@@ -157,7 +180,7 @@
 
     .character-table-box{
         display: flex;
-        /* padding-right: 8px; */
+        padding-right: 8px;
         width: 80%;
         flex-direction: column;
         justify-content: left;
@@ -187,14 +210,16 @@
     table {
         z-index: 1;
     }
-    tr {
+    th {
         padding: 2px 4px;
-        color: black;   
+        /* color: black; */
+    }
+    tr {
+        color: black;
     }
     .tr-table {
         color: white;
     }
-
 
 
     .character-table-title {
@@ -206,7 +231,6 @@
     }
     .character-table {
         background-color: cornflowerblue;
-        /* width: 100%; */
     }
     .table-body{
         background-color: white;
@@ -269,16 +293,7 @@
     .page-num a{
         color: white;
     }
-    .role-select{
-        padding: 5px 5px 5px 5px;
-        height: 30px;
-        font-size: 12px;
-    }
     
-    /* .character-table th.role-column,
-    .character-table td.role-column {
-    width: 20%;
-} */
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="./myDatePicker/mydatepicker.js"></script> -->
@@ -294,27 +309,26 @@
     <div class="body">
         <div class="character-table-box" id="characterTable">
             <div class="character-table-title">
-                <p class="table-title">User Data</p>
+                <p class="table-title">Jenis Obat Data</p>
             </div>
             <div class="table-header">
-                <a class="add-character" href="route.php?action=new-user">Add</a>
+                <a class="add-character" href="route.php?action=new-jenis">Add</a>
                     <div class="input-section"> 
                         <input type="text" id="search-input" name="search-input" placeholder="Search">
-                        <button  onclick="searchUData()">Search</button>
+                        <button  onclick="searchJData()">Search</button>
                     </div>
             </div>
             <table class="character-table" border="1" cellpadding="0" cellspacing="0">
                 <thead>
                         <tr class="tr-table">
                             <th width="5%">No</th>
-                            <th width="15%">Name</th>
-                            <th width="20%">Username</th>
-                            <th width="10%">Kata Sandi</th>
-                            <th width="10%">Last Modified</th>
-                            <th width="5%">Delete</th>
-                            <th width="5%">Modify</th>
-                            <th width="5%">Role</th>
+                            <th width="20%">Jenis</th>
+                            <th width="20%">Last Modified</th>
+                            <th width="10%">Delete</th>
+                            <th width="10%">Modify</th>
                         </tr>
+                    <?php
+                    ?>
                 </thead>
                 <tbody id="tableBody" class="table-body">
                     <?php 
@@ -323,20 +337,10 @@
                         ?>
                         <tr>
                             <th width="5%"><?php echo $no++; ?></th>
-                            <th width="15%"><?php echo $getData['nama']; ?></th>
-                            <th width="20%"><?php echo $getData['username']; ?></th>
-                            <th width="10%"><?php echo $getData['pass']; ?></th>
-                            <th width="10%"><?php echo $getData['deleted_at']; ?></th>
-                            <th width="5%"><button onclick="deleteData('<?php echo $getData['id_user']; ?>')">Delete</button></th>
-                            <th width="5%"><button onclick="modifyData('<?php echo $getData['id_user']; ?>')">Edit</button></th>
-                            <th width="5%"><?php 
-                            if ($getData['role'] == 'NULL' || $getData['role'] == '' ){
-                                echo '-';
-                            } else {
-                                echo $getData['role']; 
-                            }
-                                ?>
-                            </th>
+                            <th width="20%"><?php echo $getData['jenis']; ?></th>
+                            <th width="20%"><?php echo $getData['deleted_at']; ?></th>
+                            <th width="10%"><button onclick="deleteData('<?php echo $getData['id_jenis']; ?>')">Delete</button></th>
+                            <th width="10%"><button onclick="modifyData('<?php echo $getData['id_jenis']; ?>')">Edit</button></th>
                         </tr>
                     <?php
                     };
@@ -350,7 +354,7 @@
                 <p class="page-num"> <?php 
                 if (isset($jumlahhalaman)) {
                     for($i=0; $i<=$jumlahhalaman;  $i++){
-                    ?><a href='./route.php?action=user-data&halaman=<?=$i?>'><?=$i+1?></a> <?php
+                    ?><a href='./route.php?action=jenis-data&halaman=<?=$i?>'><?=$i+1?></a> <?php
                     }
                 } else {
                     echo "Error ";
@@ -368,19 +372,13 @@
 <script>
     const characterTable = document.getElementById('tableBody');
     let tableIndex = 1;
-    function addCharacter(number, name, username, kata_sandi, last_modified, deleteF, modify){
+    function addCharacter(number, jenis, last_modified, deleteF, modify){
         const newRow = document.createElement('tr');
         const newCol = document.createElement('td');
         newCol.innerHTML = number;
 
-        const newName = document.createElement('td');
-        newName.innerHTML = name.value;
-
-        const newUsername = document.createElement('td');
-        newUsername.innerHTML = username.value;
-
-        const newKatasandi = document.createElement('td');
-        newKatasandi.innerHTML = kata_sandi.value;
+        const newJenis = document.createElement('td');
+        newJenis.innerHTML = jenis.value;
 
         const newLastmodified = document.createElement('td');
         newLastmodified.innerHTML = last_modified.value;
@@ -432,9 +430,7 @@
         newDelete.appendChild(newdeleteButton);
 
         newRow.appendChild(newCol);
-        newRow.appendChild(newName);
-        newRow.appendChild(newUsername);
-        newRow.appendChild(newKatasandi);
+        newRow.appendChild(newJenis);
         newRow.appendChild(newLastmodified);
         newRow.appendChild(newDelete);
         newRow.appendChild(newModify);
@@ -443,16 +439,16 @@
     }
     
     function modifyData(id){
-       location.href="./route.php?action=modify-data&id=" + id;
+       location.href="./route.php?action=modify-jenis&id=" + id;
         // alert('error'); 
     }
     function deleteData(id){
-       location.href="./route.php?action=delete-data&id=" + id;
+       location.href="./route.php?action=delete-jenis&id=" + id;
         // alert('error'); 
     }
-    function searchUData(){
+    function searchJData(){
         const nilai_search = document.getElementById("search-input").value;
-        location.href="./route.php?action=user-data&nama=" + nilai_search;
+        location.href="./route.php?action=jenis-data&jenis=" + nilai_search;
         // alert('error'); 
     }
     

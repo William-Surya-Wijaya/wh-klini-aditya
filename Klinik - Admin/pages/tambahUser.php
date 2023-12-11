@@ -45,7 +45,7 @@
         gap: 15px;
         color: black;
     }
-    input[type="text"], input[type="password"], textarea {
+    input[type="text"], input[type="password"], textarea, select, option {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -173,6 +173,20 @@
                         <input type="text" id="username" name="username">
                         <label>Password</label>
                         <input type="password" id="password" name="pass">
+                        <label>Role</label>
+                        <select class="role-select" id="role-select" name="role-select">
+                            <option selected hidden value>-- Select role --</option>
+                            <?php 
+                            $id = 1;
+                            $result = getRoleSelect($id);
+                            // $roleData = getRoleSelect();
+                            foreach ($result as $role) { 
+                            ?>
+                                <option value="<?php echo $role['id_role']; ?>"><?php echo $role['role']; ?></option>
+                            <?php
+                            } 
+                            ?>
+                        </select>
 
                     </div>
                     <div class="login-button">
@@ -189,7 +203,7 @@
 </body>
 <script>
     const namaInput = document.getElementById('nama');
-    const birthdateInput = document.getElementById('birthdate');
+    const roleSelectInput = document.getElementById('roleselect');
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const loginButton = document.getElementById('loginclickbutton');
@@ -243,6 +257,14 @@
                 footer: '<a href="#">Tolong isi password anda</a>'
             });
         }
+        // else if(roleSelectInput.value==""){
+        //     Swal.fire({
+        //         icon: "error",
+        //         title: "Oops...",
+        //         text: "Something went wrong!",
+        //         footer: '<a href="#">Tolong role terlebih dahulu</a>'
+        //     });
+        // }
         else if(passwordInput.value.length < 8){
             Swal.fire({
                 icon: "error",

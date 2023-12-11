@@ -48,5 +48,8 @@ function searchThisuser($data = []) {
     searchData($data);
     view('./pages/userIndex.php', $data);
 }
+function getRoleSelect($id = null){
+    return Selectrole($id);
+}
 
 ?>
