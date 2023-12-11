@@ -45,7 +45,7 @@
         gap: 15px;
         color: black;
     }
-    input[type="text"], input[type="password"], textarea {
+    input[type="text"], input[type="password"], textarea, select, option {
         background-color: white;
         color: black;
         border: 1px solid black;
@@ -173,6 +173,20 @@
                         <input type="text" id="harga" name="harga">
                         <label>Stock</label>
                         <input type="text" id="stock" name="stock">
+                        <label>Jenis</label>
+                        <select class="jenis-select" id="jenis-select" name="jenis-select">
+                            <option selected hidden value>-- Pilih jenis obat  --</option>
+                            <?php 
+                            $id = 1;
+                            $result = getJenisSelect($id);
+                            // $roleData = getRoleSelect();
+                            foreach ($result as $jenis) { 
+                            ?>
+                                <option value="<?php echo $jenis['id_jenis']; ?>"><?php echo $jenis['jenis']; ?></option>
+                            <?php
+                            } 
+                            ?>
+                        </select>
 
                     </div>
                     <div class="login-button">
@@ -191,6 +205,7 @@
     const obatInput = document.getElementById('nama');
     const hargaInput = document.getElementById('harga');
     const stockInput = document.getElementById('stock');
+    const jenisInput = document.getElementById('jenis-select');
     const loginButton = document.getElementById('loginclickbutton');
 
     const formRegister = document.getElementById('tambah-obat');
@@ -248,6 +263,14 @@
                 title: "Oops...",
                 text: "Something went wrong!",
                 footer: '<a href="#">Tolong isi stock terlebih dahulu</a>'
+            });
+        }
+        else if(jenisInput.value==""){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#">Tolong pilih jenis obat terlebih dahulu</a>'
             });
         }
         
