@@ -26,7 +26,6 @@ function viewObat($view,$data=[]){
     $result = getPageobatData($data);
     $jumlahhalaman = pageobatNum($data);
     $halamansekarang = $data["page"];
-    // var_dump($result);   
     include $view;
 }
 

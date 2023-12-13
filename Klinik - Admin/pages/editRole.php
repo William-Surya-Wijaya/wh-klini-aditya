@@ -192,15 +192,6 @@
 
     const formRegister = document.getElementById('edit-role');
 
-    // if(usernameInput.length < 8){
-    //     Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: "Something went wrong!",
-    //             footer: '<a href="#">Minimal 8 character!</a>'
-    //         });
-    // }
-
 
     loginButton.addEventListener('click', ()=>{
         var lowerCaseLetters = /[a-z]/g;

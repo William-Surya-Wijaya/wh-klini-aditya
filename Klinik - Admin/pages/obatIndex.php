@@ -269,16 +269,7 @@
     .page-num a{
         color: white;
     }
-    .role-select{
-        padding: 5px 5px 5px 5px;
-        height: 30px;
-        font-size: 12px;
-    }
-    
-    /* .character-table th.role-column,
-    .character-table td.role-column {
-    width: 20%;
-} */
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="./myDatePicker/mydatepicker.js"></script> -->

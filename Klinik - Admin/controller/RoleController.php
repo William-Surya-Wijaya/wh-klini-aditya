@@ -38,7 +38,7 @@ function deleteThisRole($data=[]){
     deleteThisRoleData($data);
 }
 function searchThisrole($data = []) {
-    searchData($data);
+    searchRoleData($data);
     view('./pages/roleIndex.php', $data);
 }
 

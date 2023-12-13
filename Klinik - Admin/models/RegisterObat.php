@@ -59,7 +59,6 @@ function deleteThisobatData($value){
 
 function getPageobatData($value){
     include("koneksi.php");
-    // $mulai = pageData($halaman);
     $data = mysqli_query($koneksi,"SELECT a.`id_obat`, a.`nama_obat`, a.`harga_obat`, a.`stock`, a.`deleted_at`, b.`jenis` FROM obat a LEFT JOIN jenis b ON a.`id_jenis` = b.`id_jenis` where a.`deleted_at` is null and nama_obat like '%".$value["nama"]."%' limit ".($value["page"]*10).", 10");
     return $data;
 }

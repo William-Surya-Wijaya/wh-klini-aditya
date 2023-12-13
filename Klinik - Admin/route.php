@@ -134,8 +134,8 @@ if(isset($_GET['action']) && $_GET['action'] == 'role-data') {
 }
 if(isset($_GET['action']) && $_GET['action'] == 'obat-data') {
     $halaman = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 0;
-    $role = isset($_GET['nama']) ? $_GET["nama"] : '';
-    $data = ['nama' => $role,"page" => $halaman];
+    $obat = isset($_GET['nama']) ? $_GET["nama"] : '';
+    $data = ['nama' => $obat,"page" => $halaman];
     viewObat('./pages/obatIndex.php', $data);
 }
 if(isset($_GET['action']) && $_GET['action'] == 'jenis-data') {
