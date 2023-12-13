@@ -116,6 +116,7 @@ button:hover{
                 <th>Username</th>
                 <th>Password</th>
                 <th>Last Modified</th>
+                <th>Role</th>
                 <th>Edit</th>
                 <th>Delete</th>
                 </tr>
@@ -129,6 +130,7 @@ button:hover{
                             <td><?php echo $db ['nama'];?></td>
                             <td><?php echo $db ['username'];?></td>
                             <td><?php echo $db ['pass'];?></td>
+                            <td></td>
                             <td></td>
                             <td><button onclick="modifyData('<?php echo $db ['id_user']?>');">Edit</button></td>
                             <td><button onclick="deleteData('<?php echo $db['id_user']?>');">Delete</button></td>

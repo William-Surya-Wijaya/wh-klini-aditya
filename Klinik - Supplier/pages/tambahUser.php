@@ -157,9 +157,23 @@ transition: 0.5s ease-in-out;
 border: 1px solid rgba(255, 255, 255, 1);
 }
 
-.form-group{
-display: flex;
-flex-direction: column;
+
+.form-group select {
+    background-color: transparent;
+    border: 3px solid rgba(255, 228, 196, 0.842);
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 8px;
+    width: 100%;
+}
+
+.form-group select option {
+    background-color: black;
+    color: white;
+}
+
+.form-group select option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .swal-popup {
@@ -235,6 +249,16 @@ font-family: arone;
                 <div class="form-group">
                     <label for="">Konfirmasi password</label>
                     <input type="password" id="kpass" name="kpass" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Role</label>
+                    <select name="role" id="role" autocomplete="off">
+                      <option value="admin">Admin</option>
+                      <option value="member">Member</option>
+                      <option value="superadmin">SuperAdmin</option>
+                      <option value="vip">VIP</option>
+                    </select>
                 </div>
 
                 <div class="form-button">

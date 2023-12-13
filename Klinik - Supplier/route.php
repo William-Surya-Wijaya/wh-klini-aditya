@@ -1,5 +1,6 @@
 <?php
 include("./controller/registerController.php");
+include("./controller/roleController.php");
 
 if (isset($_GET['action']) && $_GET['action'] == 'register-proses'){
     registerUser($_POST);
@@ -32,10 +33,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'deleteUser') {
     deleteData($idToDelete);
 }
 
-// if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
-//     $page = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+
+// if (isset($_GET['action']) && $_GET['action'] == 'role-data') {
+//     $page = isset($_GET['halaman']) ? $_GET['halaman'] : 0;
 //     $data = ["halaman" => $page];
-//     view('./pages/userIndex.php', $data);
+//     viewRole('./pages/roleIndex.php', $data);
 // }
 
 if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
@@ -44,6 +46,39 @@ if (isset($_GET['action']) && $_GET['action'] == 'user-data') {
     $data = ["halaman" => $page, "search" => $search];
     searchUser('./pages/userIndex.php', $data);
 }
+
+//----------------------------ROLE----------------------------------
+
+
+if (isset($_GET['action']) && $_GET['action'] == 'deleteRole') {
+    $idToDelete = $_GET['id'];
+    deleteDataRole($idToDelete);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'edit-dataRole'){
+    editRole($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'editRolePage'){
+    $Ed = ['id_role' => $_GET ['id']];
+    tampilRole('./pages/editRole.php', $Ed);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'tambah-role'){
+    tambahRole($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'addRole'){
+    include("./pages/tambahRole.php");
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'role-data') {
+    $page = isset($_GET['halaman']) ? $_GET['halaman'] : 0;
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $data = ["halaman" => $page, "search" => $search];
+    searchRole('./pages/roleIndex.php', $data);
+}
+
 
 
 
