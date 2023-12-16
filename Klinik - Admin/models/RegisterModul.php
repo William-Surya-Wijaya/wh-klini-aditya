@@ -4,7 +4,7 @@ function saveUser($value) {
     include("koneksi.php");
     $query = "INSERT INTO user(nama, username, pass, id_role) 
     VALUES ('".$value['nama']."','".$value['username']."','".$value['pass']."','".$value['role-select']."')";
-    var_dump($query);
+    // var_dump($query);
     $result = mysqli_query($koneksi,$query); 
     if($result){
         header("location: ./route.php?action=user-data");
@@ -49,7 +49,6 @@ function getDataUser($value){
     // $data = mysqli_query($koneksi,"select * from user where deleted_at is not null");
     $data = mysqli_query($koneksi,"select * from user where deleted_at is null");
     return $data ;
-    // $data = mysqli_query($koneksi,"SELECT a.`id_user`, a.`nama`, a.`username`, a.`pass`, a.`deleted_at`, b.`role` FROM USER a LEFT JOIN role b ON a.`id_role` = b.`id_role` WHERE a.`deleted_at` IS NULL");
 }
 
 function getThisUserData($value){

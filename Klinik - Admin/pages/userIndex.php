@@ -299,7 +299,7 @@
             <div class="table-header">
                 <a class="add-character" href="route.php?action=new-user">Add</a>
                     <div class="input-section"> 
-                        <input type="text" id="search-input" name="search-input" placeholder="Search">
+                        <input type="text" id="search-input" name="search-input" placeholder="Search" value="<?php echo isset($_GET['nama'])? $_GET['nama']: '';?>">
                         <button  onclick="searchUData()">Search</button>
                     </div>
             </div>

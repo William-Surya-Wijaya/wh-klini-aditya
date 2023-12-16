@@ -37,7 +37,7 @@ function deleteThisobat($data=[]){
     deleteThisobatData($data);
 }
 function searchThisobat($data = []) {
-    searchData($data);
+    searchObatData($data);
     view('./pages/obatIndex.php', $data);
 }
 function getJenisSelect($id = null){

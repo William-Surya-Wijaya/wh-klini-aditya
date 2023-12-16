@@ -66,7 +66,7 @@ function getPageobatData($value){
 
 function pageobatNum($value){
     include("koneksi.php");
-    $result = mysqli_query($koneksi,"select count(*) from obat where deleted_at is null and nama_obat like '%".$value["nama"]."%'");
+    $result = mysqli_query($koneksi,"select id_obat from obat where deleted_at is null and nama_obat like '%".$value["nama"]."%'");
     $total = mysqli_num_rows($result);
     $pages = ceil($total/10);
     return $pages;

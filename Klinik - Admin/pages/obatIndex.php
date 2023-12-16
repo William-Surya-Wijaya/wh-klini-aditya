@@ -290,7 +290,7 @@
             <div class="table-header">
                 <a class="add-character" href="route.php?action=new-obat">Add</a>
                     <div class="input-section"> 
-                        <input type="text" id="search-input" name="search-input" placeholder="Search">
+                        <input type="text" id="search-input" name="search-input" placeholder="Search" value="<?php echo isset($_GET['nama'])? $_GET['nama'] :  '';?>">
                         <button  onclick="searchOData()">Search</button>
                     </div>
             </div>
@@ -309,14 +309,14 @@
                 </thead>
                 <tbody id="tableBody" class="table-body">
                     <?php 
-                    $no = 1;
+                    $no = 10 * $halamansekarang + 1;
                     while($getData = mysqli_fetch_array($result)){
                         ?>
                         <tr>
                             <th width="5%"><?php echo $no++; ?></th>
                             <th width="15%"><?php echo $getData['nama_obat']; ?></th>
-                            <th width="10%"><?php echo $getData['harga_obat']; ?></th>
-                            <th width="8%"><?php echo $getData['stock']; ?></th>
+                            <th width="10%"><?php echo number_format($getData['harga_obat'], 0, ' ','.'); ?></th>
+                            <th width="8%"><?php echo number_format($getData['stock'], 0, '', '.'); ?></th>
                             <th width="10%"><?php echo $getData['deleted_at']; ?></th>
                             <th width="5%"><button onclick="deleteData('<?php echo $getData['id_obat']; ?>')">Delete</button></th>
                             <th width="5%"><button onclick="modifyData('<?php echo $getData['id_obat']; ?>')">Edit</button></th>
@@ -340,7 +340,7 @@
                 <p >Page</p>
                 <p class="page-num"> <?php 
                 if (isset($jumlahhalaman)) {
-                    for($i=0; $i<=$jumlahhalaman;  $i++){
+                    for($i=0; $i < $jumlahhalaman;  $i++){
                     ?><a href='./route.php?action=obat-data&halaman=<?=$i?>'><?=$i+1?></a> <?php
                     }
                 } else {
@@ -446,6 +446,7 @@
         location.href="./route.php?action=obat-data&nama=" + nilai_search;
         // alert('error'); 
     }
+
     
     document.addEventListener("DOMContentLoaded", ()=> {
         setTimeout(() => {
