@@ -79,9 +79,4 @@ if (isset($_GET['action']) && $_GET['action'] == 'role-data') {
     searchRole('./pages/roleIndex.php', $data);
 }
 
-
-
-
-
-
 ?>

@@ -225,52 +225,59 @@ font-family: arone;
     <title>edit User</title>
 </head>
 <body>
-    <div class="container">
-    <div class="title">Edit User</div>
-        <div class="edit-section">
-            <form  method="POST" name="edit-form" id="edit-form" action="./route.php?action=edit-data" <?php $var = mysqli_fetch_array($result)?>>
+  <div class="container">
+  <div class="title">Edit User</div>
+      <div class="edit-section">
+          <form  method="POST" name="edit-form" id="edit-form" action="./route.php?action=edit-data" <?php $var = mysqli_fetch_array($result)?>>
 
-            <div class="form-group">
-                    <label for=""></label>
-                    <input type="hidden" id="" name="id" autocomplete="off" value = <?= $var["id_user"]?>>
-                </div>
+              <div class="form-group">
+                  <label for=""></label>
+                  <input type="hidden" id="id" name="id" autocomplete="off" value = <?= $var["id_user"]?>>
+              </div>
 
-            <div class="form-group">
-                    <label for="">Name</label>
-                    <input type="text" id="name" name="name" autocomplete="off"value = <?= $var["nama"]?> >
-                </div>
+              <div class="form-group">
+                  <label for="">Name</label>
+                  <input type="text" id="name" name="name" autocomplete="off"value = <?= $var["nama"]?> >
+              </div>
 
-                <div class="form-group">
-                    <label for="">Username</label>
-                    <input type="text" id="username" name="username" autocomplete="off" value = <?= $var["username"]?>>
-                </div>
+              <div class="form-group">
+                  <label for="">Username</label>
+                  <input type="text" id="username" name="username" autocomplete="off" value = <?= $var["username"]?>>
+              </div>
 
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="password" id="password" name="password" autocomplete="off" value = <?= $var["pass"]?>>
-                </div>
+              <div class="form-group">
+                  <label for="">Password</label>
+                  <input type="password" id="password" name="password" autocomplete="off" value = <?= $var["pass"]?>>
+              </div>
 
-                <div class="form-group">
-                    <label for="">Role</label>
-                    <select name="role" id="role" autocomplete="off">
-                      <option value="admin">Admin</option>
-                      <option value="member">Member</option>
-                      <option value="superadmin">SuperAdmin</option>
-                      <option value="vip">VIP</option>
-                    </select>
-                </div>
+              <div class="form-group">
+                  <label for="">Role</label>
+                  <select name="roles" id="roles" autocomplete="off">
+                    <?php
+                    $id = 1;
+                    $callRole = roleSelect($id);
+                    foreach ($callRole as $role){
+                      ?>  
+                      <option value="<?php echo $role['id_role']; ?>" <?= ($role['id_role'] == $var["id_role"]) ? "selected" : ''; ?>><?php echo $role['role']; ?>
+                  </option> 
+                      <?php
+                        }
+                      ?>
+                    ?>
+                  </select>
+              </div>
 
-                <div class="form-button">
-                    <button id="edit">edit</button>
-                </div>
-            </form>
-        </div>
-       <div class="pre-loader">
-        <div class="loader"></div>
-        <div class="loader-text">Loading...</div>
+              <div class="form-button">
+                  <button id="edit">edit</button>
+              </div>
+          </form>
       </div>
+      <div class="pre-loader">
+      <div class="loader"></div>
+      <div class="loader-text">Loading...</div>
     </div>
-    
+  </div>
+  
 </body>
 </html>
 

@@ -131,10 +131,11 @@ button:hover{
                             <td><?php echo $db ['username'];?></td>
                             <td><?php echo $db ['pass'];?></td>
                             <td></td>
-                            <td></td>
+                            <td><?php echo ($db['role'] != '') ? $db['role'] : '-'; ?></td>
                             <td><button onclick="modifyData('<?php echo $db ['id_user']?>');">Edit</button></td>
                             <td><button onclick="deleteData('<?php echo $db['id_user']?>');">Delete</button></td>
                         </tr>
+                        
             <?php
                 }
             ?>

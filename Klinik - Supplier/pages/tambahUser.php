@@ -252,14 +252,21 @@ font-family: arone;
                 </div>
 
                 <div class="form-group">
-                    <label for="">Role</label>
-                    <select name="role" id="role" autocomplete="off">
-                      <option value="admin">Admin</option>
-                      <option value="member">Member</option>
-                      <option value="superadmin">SuperAdmin</option>
-                      <option value="vip">VIP</option>
-                    </select>
-                </div>
+                  <label for="">Role</label>
+                  <select name="roles" id="roles" autocomplete="off">
+                    <?php
+                    $id = 1;
+                    $callRole = roleSelect($id);
+                    foreach ($callRole as $role){
+                      ?>  
+                      <option value="<?php echo $role['id_role']; ?>" <?= ($role['id_role']) ? "selected" : ''; ?>><?php echo $role['role']; ?>
+                  </option> 
+                      <?php
+                        }
+                      ?>
+                    ?>
+                  </select>
+              </div>
 
                 <div class="form-button">
                     <button id="tambah">tambah</button>

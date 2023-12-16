@@ -48,6 +48,9 @@ function tampilData($view, $id = []){
     include $view;
 }
 
+function roleSelect($id = null){
+    return getRole($id);
+}
 
 function searchUser($view, $data) {
     if (!empty($data['search'])) {
