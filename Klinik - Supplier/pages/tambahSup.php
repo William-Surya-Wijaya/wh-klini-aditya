@@ -223,18 +223,24 @@ font-family: arone;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Role</title>
+    <title>Tambah Suplier</title>
 </head>
 <body>
     <div class="container">
-    <div class="title">Tambah Role</div>
+    <div class="title">Tambah Supplier</div>
         <div class="tambah-section">
-            <form  method="POST" name="role-form" id="role-form" action="./route.php?action=tambah-role">
+            <form  method="POST" name="sup-form" id="sup-form" action="./route.php?action=tambah-sup">
 
                 <div class="form-group">
-                    <label for="">Role</label>
-                    <input type="text" id="role" name="role" autocomplete="off">
+                    <label for="">Nama</label>
+                    <input type="text" id="nama" name="nama" autocomplete="off">
                 </div>
+
+                <div class="form-group">
+                    <label for="">No HP</label>
+                    <input type="text" id="noHp" name="noHp" autocomplete="off">
+                </div>
+
 
                 <div class="form-button">
                     <button id="tambah">tambah</button>

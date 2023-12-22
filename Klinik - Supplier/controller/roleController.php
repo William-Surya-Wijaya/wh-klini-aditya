@@ -1,13 +1,6 @@
 <?php
 include('./model/roleModul.php');
 
-function viewRole($view, $data = []){
-    $result = page_dataRole($data);
-    $halaman = paginationRole($data);
-    $number = $data['halaman'];
-    include $view;
-}
-
 function tambahRole($REQ){
     if($REQ ['role'] == ''){
         header('location :./route.php?action = tambah-role');

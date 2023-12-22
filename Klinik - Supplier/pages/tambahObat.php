@@ -223,21 +223,48 @@ font-family: arone;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Role</title>
+    <title>Tambah Obat</title>
 </head>
 <body>
     <div class="container">
-    <div class="title">Tambah Role</div>
+    <div class="title">Tambah Obat</div>
         <div class="tambah-section">
-            <form  method="POST" name="role-form" id="role-form" action="./route.php?action=tambah-role">
+            <form  method="POST" name="tambah-form" id="tambah-form" action="./route.php?action=tambah-obat">
 
-                <div class="form-group">
-                    <label for="">Role</label>
-                    <input type="text" id="role" name="role" autocomplete="off">
+            <div class="form-group">
+                    <label for="">Nama Obat</label>
+                    <input type="text" id="nama-obat" name="nama-obat" autocomplete="off" >
                 </div>
 
+                <div class="form-group">
+                    <label for="">Harga Obat</label>
+                    <input type="text" id="harga-obat" name="harga-obat" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Stock</label>
+                    <input type="text" id="stock" name="stock" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Suplier</label>
+                  <select name="suplier" id="suplier" autocomplete="off">
+                    <?php
+                    $id = 1;
+                    $callSup = supSelect($id);
+                    foreach ($callSup as $sup){
+                      ?>  
+                      <option value="<?php echo $sup['id_sup']; ?>" <?= ($sup['id_sup'] == $sup["id_sup"]) ? "selected" : ''; ?>><?php echo $sup['nama']; ?>
+                  </option> 
+                      <?php
+                        }
+                      ?>
+                    ?>
+                  </select>
+              </div>
+
                 <div class="form-button">
-                    <button id="tambah">tambah</button>
+                    <button id="tambah">TAMBAH</button>
                 </div>
             </form>
         </div>
@@ -250,11 +277,15 @@ font-family: arone;
 </body>
 </html>
 
+<!--IMPORT DATE PICKER-->
+<script src="../library/myDatePicker/mydatepicker.js"></script>
+<link rel="stylesheet" href="../library/myDatePicker/mydatepicker.css">
+<!---->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-     document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
       setTimeout(()=>{
         document.querySelector('.pre-loader').classList.add('hide');
         setTimeout(()=>{
@@ -262,4 +293,4 @@ font-family: arone;
         }, 500);
       }, 500);
     });
-</script>
+  </script>

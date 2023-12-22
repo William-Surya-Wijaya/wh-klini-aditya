@@ -46,13 +46,13 @@ function deleteDataRole($id) {
     }
 }
 
-function paginationRole($page)
-{
-    include('koneksi.php');
-    $data = mysqli_query($koneksi, "SELECT count(*) as jumlah_halaman FROM `role` WHERE deleted_at IS NULL");
-    $pg = ceil(mysqli_fetch_array($data)['jumlah_halaman']/5);
-    return $pg;
-}
+// function paginationRole($page)
+// {
+//     include('koneksi.php');
+//     $data = mysqli_query($koneksi, "SELECT count(*) as jumlah_halaman FROM `role` WHERE deleted_at IS NULL");
+//     $pg = ceil(mysqli_fetch_array($data)['jumlah_halaman']/5);
+//     return $pg;
+// }
 
 function page_dataRole($page){
     include('koneksi.php');
@@ -66,5 +66,6 @@ function searchDataRole($search, $page) {
     $result = mysqli_query($koneksi, "SELECT * FROM `role` WHERE deleted_at IS NULL $condition LIMIT " . ($page * 5) . ",5");
     return $result;
 }
+
 
 ?>

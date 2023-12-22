@@ -1,6 +1,8 @@
 <?php
 include("./controller/registerController.php");
 include("./controller/roleController.php");
+include("./controller/obatController.php");
+include("./controller/supplierController.php");
 
 if (isset($_GET['action']) && $_GET['action'] == 'register-proses'){
     registerUser($_POST);
@@ -77,6 +79,69 @@ if (isset($_GET['action']) && $_GET['action'] == 'role-data') {
     $search = isset($_GET['search']) ? $_GET['search'] : '';
     $data = ["halaman" => $page, "search" => $search];
     searchRole('./pages/roleIndex.php', $data);
+}
+
+
+//----------------------------OBAT----------------------------------
+
+if (isset($_GET['action']) && $_GET['action'] == 'obat-data') {
+    $page = isset($_GET['halaman']) ? $_GET['halaman'] : 0;
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $data = ["halaman" => $page, "search" => $search];
+    searchObat('./pages/obatIndex.php', $data);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'tambah-obat'){
+    tambahObat($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'addObat'){
+    include("./pages/tambahObat.php");
+}
+
+
+if (isset($_GET['action']) && $_GET['action'] == 'edit-obatData'){
+    modifyObat($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'edit-obat'){
+    $Ed = ['id_obat' => $_GET ['id']];
+    tampilDataObat('./pages/editObat.php', $Ed);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'deleteObat') {
+    $idToDelete = $_GET['id'];
+    deleteDataObat($idToDelete);
+}
+
+//----------------------------SUPPLIER----------------------------------
+if (isset($_GET['action']) && $_GET['action'] == 'sup-data') {
+    $page = isset($_GET['halaman']) ? $_GET['halaman'] : 0;
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $data = ["halaman" => $page, "search" => $search];
+    searchSup('./pages/supplierIndex.php', $data);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'tambah-sup'){
+    tambahSup($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'addSup'){
+    include("./pages/tambahSup.php");
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'deleteSup') {
+    $idToDelete = $_GET['id'];
+    deleteDataSup($idToDelete);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'edit-dataSup'){
+    editSup($_POST);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'editSupPage'){
+    $Ed = ['id_sup' => $_GET ['id']];
+    tampilSup('./pages/editSupplier.php', $Ed);
 }
 
 ?>

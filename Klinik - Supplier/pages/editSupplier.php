@@ -61,7 +61,7 @@ padding: 30px 40px 30px 30px;
 }
 
 
-.tambah-section{
+.edit-section{
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -115,7 +115,7 @@ opacity: 0;
 100% { transform: rotate(360deg); }
 }
 
-.tambah-section form{
+.edit-section form{
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -157,14 +157,13 @@ transition: 0.5s ease-in-out;
 border: 1px solid rgba(255, 255, 255, 1);
 }
 
-
 .form-group select {
     background-color: transparent;
     border: 3px solid rgba(255, 228, 196, 0.842);
     border-radius: 5px;
     font-size: 18px;
     padding: 8px;
-    width: 100%;
+    width: 100%; 
 }
 
 .form-group select option {
@@ -223,21 +222,31 @@ font-family: arone;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Role</title>
+    <title>edit Suplier</title>
 </head>
 <body>
     <div class="container">
-    <div class="title">Tambah Role</div>
-        <div class="tambah-section">
-            <form  method="POST" name="role-form" id="role-form" action="./route.php?action=tambah-role">
+    <div class="title">Edit Suplier</div>
+        <div class="edit-section">
+            <form  method="POST" name="edit-form" id="edit-form" action="./route.php?action=edit-dataSup" <?php $var = mysqli_fetch_array($result)?>>
+
+            <div class="form-group">
+                    <label for=""></label>
+                    <input type="hidden" id="id" name="id" autocomplete="off" value = <?= $var["id_sup"]?>>
+                </div>
 
                 <div class="form-group">
-                    <label for="">Role</label>
-                    <input type="text" id="role" name="role" autocomplete="off">
+                    <label for="">Nama</label>
+                    <input type="text" id="nama" name="nama" autocomplete="off" value = <?= $var["nama"]?>>
+                </div>
+
+                <div class="form-group">
+                    <label for="">No Hp</label>
+                    <input type="text" id="noHp" name="noHp" autocomplete="off" value = <?= $var["noHP"]?>>
                 </div>
 
                 <div class="form-button">
-                    <button id="tambah">tambah</button>
+                    <button id="edit">edit</button>
                 </div>
             </form>
         </div>
@@ -250,6 +259,10 @@ font-family: arone;
 </body>
 </html>
 
+<!--IMPORT DATE PICKER-->
+<script src="../library/myDatePicker/mydatepicker.js"></script>
+<link rel="stylesheet" href="../library/myDatePicker/mydatepicker.css">
+<!---->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -263,3 +276,9 @@ font-family: arone;
       }, 500);
     });
 </script>
+
+   
+
+
+
+

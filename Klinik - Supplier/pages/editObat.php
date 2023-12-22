@@ -61,7 +61,7 @@ padding: 30px 40px 30px 30px;
 }
 
 
-.tambah-section{
+.edit-section{
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -115,7 +115,7 @@ opacity: 0;
 100% { transform: rotate(360deg); }
 }
 
-.tambah-section form{
+.edit-section form{
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -157,14 +157,13 @@ transition: 0.5s ease-in-out;
 border: 1px solid rgba(255, 255, 255, 1);
 }
 
-
 .form-group select {
     background-color: transparent;
     border: 3px solid rgba(255, 228, 196, 0.842);
     border-radius: 5px;
     font-size: 18px;
     padding: 8px;
-    width: 100%;
+    width: 100%; 
 }
 
 .form-group select option {
@@ -223,38 +222,75 @@ font-family: arone;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Role</title>
+    <title>edit Obat</title>
 </head>
 <body>
-    <div class="container">
-    <div class="title">Tambah Role</div>
-        <div class="tambah-section">
-            <form  method="POST" name="role-form" id="role-form" action="./route.php?action=tambah-role">
+  <div class="container">
+  <div class="title">Edit Obat</div>
+      <div class="edit-section">
+          <form  method="POST" name="edit-form" id="edit-form" action="./route.php?action=edit-obatData" <?php $var = mysqli_fetch_array($result)?>>
 
-                <div class="form-group">
-                    <label for="">Role</label>
-                    <input type="text" id="role" name="role" autocomplete="off">
-                </div>
+              <div class="form-group">
+                  <label for=""></label>
+                  <input type="hidden" id="id" name="id" autocomplete="off" value = <?= $var["id_obat"]?>>
+              </div>
 
-                <div class="form-button">
-                    <button id="tambah">tambah</button>
-                </div>
-            </form>
-        </div>
-       <div class="pre-loader">
-        <div class="loader"></div>
-        <div class="loader-text">Loading...</div>
+              <div class="form-group">
+                  <label for="">Nama Obat</label>
+                  <input type="text" id="namaObat" name="namaObat" autocomplete="off"value = <?= $var["nama_obat"]?> >
+              </div>
+
+              <div class="form-group">
+                  <label for="">Harga Obat</label>
+                  <input type="text" id="hargaObat" name="hargaObat" autocomplete="off" value = <?= $var["harga_obat"]?>>
+              </div>
+
+              <div class="form-group">
+                  <label for="">Stock</label>
+                  <input type="text" id="stock" name="stock" autocomplete="off" value = <?= $var["stock"]?>>
+              </div>
+
+              <div class="form-group">
+                  <label for="">Suplier</label>
+                  <select name="suplier" id="suplier" autocomplete="off">
+                    <?php
+                    $id = 1;
+                    $callSup = supSelect($id);
+                    foreach ($callSup as $sup){
+                      ?>  
+                      <option value="<?php echo $sup['id_sup']; ?>" <?= ($sup['id_sup'] == $sup["id_sup"]) ? "selected" : ''; ?>><?php echo $sup['nama']; ?>
+                  </option> 
+                      <?php
+                        }
+                      ?>
+                    ?>
+                  </select>
+              </div>
+
+              <div class="form-button">
+                  <button id="edit">EDIT</button>
+              </div>
+          </form>
       </div>
+      <div class="pre-loader">
+      <div class="loader"></div>
+      <div class="loader-text">Loading...</div>
     </div>
-    
+  </div>
+  
 </body>
 </html>
 
+<!--IMPORT DATE PICKER-->
+<script src="../library/myDatePicker/mydatepicker.js"></script>
+<link rel="stylesheet" href="../library/myDatePicker/mydatepicker.css">
+<!---->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-     document.addEventListener("DOMContentLoaded", function() {
+
+    document.addEventListener("DOMContentLoaded", function() {
       setTimeout(()=>{
         document.querySelector('.pre-loader').classList.add('hide');
         setTimeout(()=>{
@@ -262,4 +298,5 @@ font-family: arone;
         }, 500);
       }, 500);
     });
-</script>
+
+  </script>
