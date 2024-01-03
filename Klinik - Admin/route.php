@@ -4,6 +4,11 @@ include("./controller/RegisterController.php");
 include("./controller/RoleController.php");
 include("./controller/ObatController.php");
 include("./controller/JenisController.php");
+include("./controller/TransController.php");
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 // ------------------------------------------------ user
 if(isset($_GET['action']) && $_GET['action'] == 'register-process') {
     registerUser($_POST);
@@ -17,12 +22,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit-user') {
 if(isset($_GET['action']) && $_GET['action'] == 'search-user') {
     searchUser($_POST);
 }
-// if(isset($_GET['action']) && $_GET['action'] == 'role-user') {
-//     $router->get('/users/role/:id', function($data) {
-//         $role = getRoleSelect($data);
-//         return $role;
-//       });
-// }
+
 
 // -------------------------------- role -------------------------------------
 if(isset($_GET['action']) && $_GET['action'] == 'tambah-role') {
@@ -45,6 +45,19 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit-obat') {
 if(isset($_GET['action']) && $_GET['action'] == 'search-obat') {
     searchObatData($_POST);
 }
+if(isset($_GET['action']) && $_GET['action'] == 'search-auto-obat') {
+    searchObatautodata(isset($_GET['term'])? $_GET['term']: '' );
+}
+if(isset($_GET['action']) && $_GET['action'] == 'search-harga-auto-obat') {
+    searchObathargaAutodata(isset($_GET['term'])? $_GET['term']: '' );
+}
+if(isset($_GET['action']) && $_GET['action'] == 'search-qty-auto-obat') {
+    searchObatQtyAutodata(isset($_GET['term'])? $_GET['term']: '' );
+}
+if(isset($_GET['action']) && $_GET['action'] == 'subtotal-auto-obat') {
+    searchSubtotalAutodata(isset($_GET['term'])? $_GET['term']: '' );
+}
+
 // ------------------------------------ jenis obat -----------------------------
 if(isset($_GET['action']) && $_GET['action'] == 'tambah-jenis') {
     tambahJenis($_POST);
@@ -55,6 +68,17 @@ if(isset($_GET['action']) && $_GET['action'] == 'edit-jenis') {
 if(isset($_GET['action']) && $_GET['action'] == 'search-jenis') {
     searchJenisData($_POST);
 }
+// ----------------------------------- trans ------------------------------------
+if(isset($_GET['action']) && $_GET['action'] == 'tambah-trans') {
+    tambahTrans($_POST);
+}
+if(isset($_GET['action']) && $_GET['action'] == 'edit-trans') {
+    modifyTrans($_POST);
+}
+if(isset($_GET['action']) && $_GET['action'] == 'search-trans') {
+    searchTransData($_POST);
+}
+// -------------------------------------  DATA  ----------------------------------------
 
 
 // ------------------------------------  user-data ----------------------------
@@ -117,7 +141,20 @@ if(isset($_GET['action']) && $_GET['action'] == 'delete-jenis') {
     $data = ['id_jenis'=> $_GET["id"]];
     deleteThisjenis($data);
 }
-
+// ---------------------------------- trans-data ---------------------------------
+if(isset($_GET['action']) && $_GET['action'] == 'new-trans') {
+    include('./pages/tambahTrans.php');
+}
+if(isset($_GET['action']) && $_GET['action'] == 'modify-trans') {
+    // include('./pages/editData.php');
+    $data = ['id_trans'=> $_GET["id"]];
+    getThisTrans('./pages/editJenis.php',$data);
+}
+if(isset($_GET['action']) && $_GET['action'] == 'delete-trans') {
+    // include('./pages/editData.php');
+    $data = ['id_trans'=> $_GET["id"]];
+    deleteThisTrans($data);
+}
 
 // --------------------------------- halaman --------------------------------------
 if(isset($_GET['action']) && $_GET['action'] == 'user-data') {
@@ -143,6 +180,9 @@ if(isset($_GET['action']) && $_GET['action'] == 'jenis-data') {
     $jenis = isset($_GET['jenis']) ? $_GET["jenis"] : '';
     $data = ['jenis' => $jenis,"page" => $halaman];
     viewJenis('./pages/jenisObatIndex.php', $data);
+}
+if(isset($_GET['action']) && $_GET['action'] == 'trans-data') {
+    viewTrans('./pages/transIndex.php');
 }
 
 
