@@ -1,99 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="./myDatePicker/mydatepicker.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style >
      @font-face {
         font-family: arone;
         src: url(./pages/ARONE.ttf);
     }
+    ::-webkit-scrollbar{
+            width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+            background: rgb(160, 158, 158);
+            border-radius: 10px;
+    }
     * {
         padding: 0;
         margin: 0;
         font-family: arone ;
+        
     }
     .body {
         display: flex;
-        flex-direction: column;
+        padding: 65px 0 0 0;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         background-color: white;
         gap :50px;
-        height: 81vh;
+        height: 82vh;
         overflow:hidden;
+        background-color: cornflowerblue;
+   
 
     }
 
     a {
         text-decoration: none;
         color: black;
+        width: 3%;
     }
     .login-section {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
         gap: 20px;
-        width: 30%;
+        width: 100%;
     }
     .input-section {
         display: flex;
-        width: 100%;
+        /* width: 20%; */
         font-size: 20px;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
-        align-items: left;
+        align-items: center;
         gap: 15px;
         color: black;
     }
-    input[type="text"], input[type="password"], textarea {
+    /* .login-button{
+        background-color: cornflowerblue;
+        border: 2px solid cornflowerblue;
+        color: white;
+    } */
+    input[type="text"], select, textarea, input[type="date"] {
         background-color: white;
         color: black;
         border: 1px solid black;
         border-radius: 5px;
         padding: 10px 10px 10px 10px;
+        font-size:15px;
     }
-    .login-section form {
-        display: flex;
-        height: 100%;
-        width: 50%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-    }
-    button:hover {
-        color: black;
-        background-color: transparent;
-        border: 2px solid black;
-        
-    }
-    button{
-        /* font-family: arone; */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        background-color: white;
-        padding: 5px 15px 5px 15px;
-        border: 2px solid rgba(255, 255, 255, 0.199);
-        width: 100%;
-        transition: all .5s ease-in-out;
-    }
+
+
+        .login-section form {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
 
     footer{
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        background-color: cornflowerblue;
         /* gap :50px; */
-        height: 19vh;
+        height: 11.95vh;
         overflow: hidden;
     }
     .footer-section {
         color: black;
         flex-direction: column;
-        background-color: white;
+        background-color: black;
         display: flex;
         column-gap: 1em;
         font-weight: 800;
@@ -110,7 +117,7 @@
         width: 50px;
         height: 50px;
         animation: spin 1s linear infinite;
-        z-index: 11;
+        z-index: 99 !important;
         position: fixed;
         bottom: 440px;
         align-items: center;
@@ -124,8 +131,8 @@
         position: fixed;
         align-items: center;
         justify-content: center;
-        z-index: 11;
-        transition: all .35s,2s ease-in-out;
+        z-index: 99 !important;
+        transition: all .35s,1.5s ease-in-out;
     }
     .loader-hidden{
         opacity: 0;
@@ -150,113 +157,597 @@
         padding-bottom: 20px;
     }
 
-    .tanggalinputbox {
-        background-color: white; 
-        color: black !important;
-        /* color-scheme: dark; */
-        border: 1px solid black;
-        padding: 10px 10px 10px 10px;
+    .character-table-box{
+        display: flex;
+        /* padding-right: 8px; */
+        width: 80%;
+        flex-direction: column;
+        justify-content: left;
+        color :aliceblue;
+        font-weight: 500;
+        height: 100%;
+        max-height: 100%;
+        overflow: auto;
+        z-index: 1;
+        /* align-items:     ; */
     }
-   
-    .header {
-        color: white !important;
+
+    .table-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: right;
+        padding: 20px 0px 10px;
+        width: 100%;
+    }
+    form {
+        width: 100%;
+        align-items: right;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    table {
+        z-index: 1;
+    }
+    tr {
+        padding: 2px 4px;
+        color: black;   
+    }
+    .tr-table {
+        color: white;
+    }
+
+
+
+    .character-table-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: black;
+    }
+    .character-table {
+        background-color: cornflowerblue;
+        /* width: 100%; */
+    }
+    .table-body{
+        background-color: white;
+    }
+    .table-title {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        font-size: 25px;
+        padding: 10px 20px 10px 20px;
+        border: 2px solid black;
+        border-radius: 20px;
+        color: white;
+        background-color: black;
+    }
+    .add-character {
+        display: flex;
+        align-items: center;
+        padding: 5px 10px 5px 10px;
+        text-align: center;
+        font-size: 20px;
+        color: black;
+        /* width: 3%; */
+        border: 1px solid black;
+        border-radius: 10px;
+        justify-content: center;
+        background-color: white;
+    }
+    table td{
+        padding: 0.5em 1em;
+        text-align: center;
     }
     
+    .tButton {
+        cursor: pointer;
+    }
+    button{
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        color: black;
+        border: 2px solid rgba(255, 255, 255, 0.199);
+        background-color: white;
+        font-weight: 600;
+        font-size: 20px;
+        cursor: pointer ;
+    }
+    p {
+        color: white;
+        justify-content: space-between;
+    }
+
+    .page {
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        padding-top: 5%;
+    }
+    
+
+    /* .login-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: left;
+        gap: 20px;
+        width: 30%;
+    } */
+
+
+    .page-num {
+        justify-content: space-between;
+    }
+    .page-num a{
+        color: white;
+    }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- <script src="./myDatePicker/mydatepicker.js"></script> -->
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klinik Aditya</title>
 </head>
 <body>
+    <div class="loader-section" id="loader">
+        <div class="loader"></div>
+        </div> 
     <div class="body">
-            <div class="login-section">
-                <p class="title">Tambah Trans</p>
-                <form method="post" id="tambah-trans" name="tambah-trans" action="./route.php?action=tambah-trans">
-                    <div class="input-section">
-                        <label>Tanggal</label>
-                        <input type="date" id="tanggal" name="tanggal" class="tanggalinputbox">
-                        <!-- <input type="hidden" id="tanggal-hidden" name="tanggal-hidden"> -->
-                        <label>Total</label>
-                        <input type="text" id="total" name="total" readonly>
-                        <label>Total Qty</label>
-                        <input type="text" id="qty" name="qty" readonly>
+        <div class="character-table-box" id="characterTable">
+            <div class="character-table-title">
+                <p class="table-title">Trans Data</p>
+            </div>
+            <form method="post" id="tambah-trans" name="tambah-trans" action="./route.php?action=tambah-trans">
+                <div class="table-header">
+                    <div class="login-section">
+                        <div class="input-section">
+                            <label>Tanggal</label>
+                            <input type="date" id="tanggal" name="tanggal" class="tanggalinputbox" >
+                            <input type="hidden" id="nomorIndex" name="nomorIndex" readonly >  
+                            <!-- <input type="hidden" id="tanggal-hidden" name="tanggal-hidden"> -->
+                            <label>Total</label>
+                            <input type="text" id="totalHarga" name="totalHarga" readonly>
+                            <label>Total Qty</label>
+                            <input type="text" id="totalQty" name="totalQty" readonly>
+                        </div>
+                        <div class="login-button">
+                            <button id="loginclickbutton">Tambah</button>
+                            <!-- <input type="submit" value="Login"> -->
+                        </div> 
                         
-
                     </div>
-                    <div class="login-button">
-                        <button id="loginclickbutton">Tambah</button>
-                        <!-- <input type="submit" value="Login"> -->
-                    </div> 
-                </form>
-            </div>
-            <div class="loader-section" id="loader">
-                <div class="loader"></div>
-            </div>
-        </div>
-    
-</body>
-<script>
-    const tanggalInput = document.getElementById('tanggal');
-    const loginButton = document.getElementById('loginclickbutton');
-
-    const formRegister = document.getElementById('tambah-trans');
-
-    // if(usernameInput.length < 8){
-    //     Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: "Something went wrong!",
-    //             footer: '<a href="#">Minimal 8 character!</a>'
-    //         });
-    // }
-
-
-    loginButton.addEventListener('click', ()=>{
-        var lowerCaseLetters = /[a-z]/g;
-        var upperCaseLetters = /[A-Z]/g;
-        var numbers = /[0-9]/g;
-        event.preventDefault();
-        if(tanggalInput.value==""){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Tolong pilih tanggal terlebih dahulu!</a>'
-            });
-        }
-        else if(numbers.test(roleInput.value)){
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer: '<a href="#">Hanya boleh diisi dengan huruf</a>'
-            });
-        }
+                    <!-- <div class="input-section"> 
+                        <input type="text" id="search-input" name="search-input" placeholder="Search" value="<?php echo isset($_GET['id_trans'])? $_GET['id_trans'] :  '';?>">
+                        <button  onclick="searchTData()">Search</button>
+                    </div> -->
+                </div>
+                
+                <table class="character-table" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr class="tr-table">
+                            <th width="5%">No</th>
+                            <th width="15%">Obat</th>
+                            <th width="8%">Qty</th>
+                            <th width="10%">Harga</th>
+                            <th width="10%">Subtotal</th>
+                            <th width="5%">Delete</th>
+                            <!-- <th width="5%">Modify</th> -->
+                            <!-- <th width="10%">Jenis</th> -->
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="table-body"></tbody>
+                </table>
+                <button type="button" onclick = "save()" class="saveclickbutton" id="saveclickbutton">Save</button>
+            </form>
         
-        else {
-            Swal.fire({
+    </div>
+    
+</div>
+
+    </div>
+</div>
+</body>
+<footer></footer>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+    let totalHarga = 0;
+    let totalQty = 0;
+
+    const characterTable = document.getElementById('tableBody');
+    // const tanggalInput = document.getElementById('tanggal');
+    // const totalInput = document.getElementById('total');
+    // const qtyInput = document.getElementById('qty');
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+            const loginButton = document.getElementById('loginclickbutton')
+            loginButton.addEventListener('click', (event)=>{
+                event.preventDefault();
+                Swal.fire({
+                    title: "Success",
+                    text: "Added a New Data",
+                    icon: "success"
+                });
+                addCharacter();
+            });
+        });
+        const formRegister = document.getElementById('tambah-trans');
+        let tableIndex = 1;
+        function addCharacter(number, obat, qty, harga, subtotal, deleteF){
+            const newRow = document.createElement('tr');
+            const newCol = document.createElement('td');
+            newCol.textContent = tableIndex;
+            
+            const newObat = document.createElement('td');
+            const newObatInput = document.createElement('input');
+            
+            newObatInput.type = 'text';
+            newObatInput.autocomplete = 'off';
+            newObatInput.name = 'newObatInput'+tableIndex;
+            newObatInput.id = 'newObatInput'+tableIndex;
+            newObatInput.classList.add('autoobatdata') ;
+            newObat.appendChild(newObatInput);
+
+            const newidobatInput = document.createElement('input');
+            
+            newidobatInput.type = 'hidden';
+            newidobatInput.autocomplete = 'off';
+            newidobatInput.name = 'newidobatInput'+tableIndex;
+            newidobatInput.id = 'newidobatInput'+tableIndex;
+            newidobatInput.classList.add('autoidobatdata') ;
+            newObat.appendChild(newidobatInput);
+            
+            // autoObatData();
+            // newObat.innerHTML = obat.value;
+            
+            const newqty = document.createElement('td');
+            const newqtyInput = document.createElement('input');
+            newqtyInput.type = 'text';
+            newqtyInput.name = 'newqtyInput'+tableIndex;
+            newqtyInput.id = 'newqtyInput'+tableIndex;
+            newqty.appendChild(newqtyInput);
+            // newqty.innerHTML = qty.value;
+            
+            const newHarga = document.createElement('td');
+            const newHargaInput =document.createElement('input');
+            newHargaInput.type = 'text';
+            newHargaInput.name = 'newHargaInput'+tableIndex;
+            newHargaInput.id = 'newHargaInput'+tableIndex;
+            newHargaInput.readOnly = true;
+            newHarga.appendChild(newHargaInput);
+            
+            // newHarga.innerHTML = harga.value;
+            
+            const newSubtotal = document.createElement('td');
+            const newSubtotalInput =document.createElement('input');
+            newSubtotalInput.type = 'text';
+            newSubtotalInput.readOnly = true;
+            newSubtotalInput.name = 'newSubtotalInput'+tableIndex;
+            newSubtotalInput.id = 'newSubtotalInput'+tableIndex;
+            newSubtotal.appendChild(newSubtotalInput);
+            
+            $(newqtyInput).keyup(function(e){
+                var subtotal= newHargaInput.value * this.value;
+                newSubtotalInput.value = subtotal; 
+                totalQty=0;
+                totalHarga=0;
+
+                for (let i=1; i < tableIndex; i++ ){
+                    // $('#newHargaInput'+(newCol.textContent)).val(data);
+                    // $('#newqtyInput'+(newCol.textContent)).val('1');
+
+                    // $('#newSubtotalInput'+(newCol.textContent)).val(data);
+                    // console.log($('#newqtyInput'+(i)).val());
+                    if ($('#newqtyInput'+(i)).val() == undefined){
+                        totalQty += 0;
+                    } else if ($('#newqtyInput'+(i)).val() == ''){
+                        totalQty +=0;
+                    }
+                    else {
+                        totalQty+=parseInt($('#newqtyInput'+(i)).val());
+                        
+                    }
+                    if ($('#newSubtotalInput'+(i)).val() == undefined){
+                        totalHarga += 0;
+                    } else if ($('#newSubtotalInput'+(i)).val() == ''){
+                        totalHarga +=0;
+                    }
+                    else {
+                        totalHarga+=parseInt($('#newSubtotalInput'+(i)).val());
+                        
+                    }
+                    // console.log($('#newqtyInput'+(i)).val());
+                    // totalHarga+=parseInt($('#newSubtotalInput'+(i)).val());
+                    // totalHarga+=parseInt(data);
+                }
+                $('#totalQty').val(totalQty);
+                $('#totalHarga').val(totalHarga);
+
+            });
+            
+            
+            $(newObatInput).autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-auto-obat",
+                        dataType: "json",
+                        data: {
+                            term: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 1,
+                select: function(event, ui) {
+                    var selectedUi = ui;
+                    $.ajax({
+                        url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-harga-auto-obat&"+newHargaInput.value,
+                        dataType: "json",
+                        data: {
+                            term: ui.item.value
+                        },
+                        success: function(data, ui) {
+                            // alert(tableIndex);
+                            $('#newHargaInput'+(newCol.textContent)).val(data);
+                            $('#newqtyInput'+(newCol.textContent)).val('1');
+                            $('#newSubtotalInput'+(newCol.textContent)).val(data);
+                            totalQty+=1;
+                            totalHarga+=parseInt(data);
+                            $('#totalQty').val(totalQty);
+                            $('#totalHarga').val(totalHarga);
+
+                            $.ajax({
+                                url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-id-auto-obat&"+newHargaInput.value,
+                                dataType: "json",
+                                data: {
+                                    term: selectedUi.item.value
+                                },
+                                success: function(data) {
+                                    // alert(tableIndex);
+                                    $('#newidobatInput'+(newCol.textContent)).val(data);
+                                    
+                                },
+                            });
+                            
+                        },
+                    });
+                    
+                    
+                    // $.ajax({
+                        //     url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-qty-auto-obat&"+newqtyInput.value,
+                        //     dataType: "json",
+                        //     data: {
+                            //         term: ui.item.value
+                            //     },
+                            //     success: function(data) {
+                                //         // alert(tableIndex);
+                                //         $('#newqtyInput'+(tableIndex-1)).val(data);
+                                //     },
+                                // });
+                                
+                                // $.ajax({
+                                    //     url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=subtotal-auto-obat&"+newSubtotalInput.value,
+                                    //     dataType: "json",
+                                    //     data: {
+                                        //         term: ui.item.value
+                                        //     },
+                                        //     success: function(data) {
+                                            //         // alert(tableIndex);
+                                            //         $('#newSubtotalInput'+(tableIndex-1)).val(data);
+                                            //     }
+                                            // });
+                                            // Koding disini mau ngapain, bisa ajax sekali lagi untuk ambil harga barang tersebut
+                                            console.log("Selected: " + ui.item.value);
+                                        }
+                                    });
+                                        
+            const newDelete = document.createElement('td');
+            const newdeleteButton = document.createElement('DButton')
+            newdeleteButton.classList.add('tButton');
+            newdeleteButton.innerHTML = "Delete";
+            newdeleteButton.addEventListener('click', ()=>{
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger"
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        newRow.remove();
+                        swalWithBootstrapButtons.fire({
+                            title: "Deleted!",
+                            text: `Row has been deleted`,
+                            icon: "success"
+                        });
+                        totalQty=0;
+                        totalHarga=0;
+
+                        for (let i=1; i < tableIndex; i++ ){
+                            // $('#newHargaInput'+(newCol.textContent)).val(data);
+                            // $('#newqtyInput'+(newCol.textContent)).val('1');
+
+                            // $('#newSubtotalInput'+(newCol.textContent)).val(data);
+                            // console.log($('#newqtyInput'+(i)).val());
+                            if ($('#newqtyInput'+(i)).val() == undefined){
+                                totalQty += 0;
+                            } else if ($('#newqtyInput'+(i)).val() == ''){
+                                totalQty +=0;
+                            }
+                            else {
+                                totalQty+=parseInt($('#newqtyInput'+(i)).val());
+                                
+                            }
+                            if ($('#newSubtotalInput'+(i)).val() == undefined){
+                                totalHarga += 0;
+                            } else if ($('#newSubtotalInput'+(i)).val() == ''){
+                                totalHarga +=0;
+                            }
+                            else {
+                                totalHarga+=parseInt($('#newSubtotalInput'+(i)).val());
+                                
+                            }
+                            // console.log($('#newqtyInput'+(i)).val());
+                            // totalHarga+=parseInt($('#newSubtotalInput'+(i)).val());
+                            // totalHarga+=parseInt(data);
+                        }
+                        $('#totalQty').val(totalQty);
+                        $('#totalHarga').val(totalHarga);
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                            swalWithBootstrapButtons.fire({
+                                title: "Cancelled",
+                                text: "Nothing Changed",
+                                icon: "error"
+                            });
+                        }
+                    });
+                    
+                });
+                
+                // const loginButton = document.getElementById('loginclickbutton');
+                
+                
+                
+                
+                newDelete.appendChild(newdeleteButton);
+                
+                newRow.appendChild(newCol);
+                newRow.appendChild(newObat);
+                newRow.appendChild(newqty);
+                newRow.appendChild(newHarga);
+                newRow.appendChild(newSubtotal);
+                newRow.appendChild(newDelete);
+                // newRow.appendChild(newLastmodified);
+                // newRow.appendChild(newModify);
+                
+                characterTable.appendChild(newRow);
+                $('#nomorIndex').val(tableIndex);            
+
+                tableIndex++;
+            }
+            // const formRegister = document.getElementById('tambah-trans');
+        //     const saveButton = document.getElementById('saveclickbutton')
+        //     saveButton.addEventListener('click', (event)=>{
+        //         event.preventDefault();
+        //     Swal.fire({
+        //         title: "Success",
+        //         text: "Data has been saved!",
+        //         icon: "success"
+        //     });
+        //     formRegister.submit();
+        // });
+
+        function save(){
+            // loginButton.addEventListener('click', ()=>{
+            // event.preventDefault();
+            // if(newObatInput.value==""){
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Oops...",
+            //         text: "Something went wrong!",
+            //         footer: '<a href="#">Tolong isi nama terlebih dahulu</a>'
+            //     });
+            // };
+            let tanggalData = document.getElementById("tanggal").value;
+            let HargaData = document.getElementById("totalHarga").value;
+            let qtyData = document.getElementById("totalQty").value;
+            let indexData = document.getElementById("nomorIndex").value;
+            if(tanggalData == "" || tanggalData == null){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="#">Tolong isi tanggal terlebih dahulu</a>'
+                });
+            }
+            else if(HargaData == "" || HargaData == null || HargaData == "0"){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="#">Tolong isi total harga terlebih dahulu</a>'
+                });
+            }
+            else if(qtyData == "" || qtyData == null || qtyData == "0"){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="#">Tolong isi total qty terlebih dahulu</a>'
+                });
+            }
+            else if(indexData == "" || indexData == null || indexData == "0"){
+                Swal.fire({
+                    icon: "error",  
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="#">Nomor Index Kosong!</a>'
+                });
+            }
+            else {
+                Swal.fire({
                 title: "Success",
-                text: "Role berhasil ditambah!",
+                text: "Register Berhasil!",
                 icon: "success"
             });
             formRegister.submit();
-        }
-    })
+            };
 
-   document.addEventListener("DOMContentLoaded", ()=> {
+
+            // });
+        };
+
+
+        
+        // function modifyData(id){
+            //    location.href="./route.php?action=modify-trans&id=" + id;
+    //     // alert('error'); 
+    // }
+    // function deleteData(id){
+    //    location.href="./route.php?action=delete-trans&id=" + id;
+    //     // alert('error'); 
+    // };
+    // function searchTData(){
+    //     const nilai_search = document.getElementById("search-input").value;
+    //     location.href="./route.php?action=trans-data&id_trans=" + nilai_search;
+    //     // alert('error'); 
+    // };
+
+    
+    document.addEventListener("DOMContentLoaded", ()=> {
         setTimeout(() => {
             document.querySelector(".loader-section").classList.add("loader-hidden");
-            document.querySelector(".loader-section").addEventListener("transitionend", ()=> {
-                document.body.removeChild(document.querySelector(".loader-section"));
+            // document.querySelector(".loader-section").addEventListener("transitionend", ()=> {
+            //     document.body.removeChild(document.querySelector(".loader-section"));
             
-            }, 300);
+            // }, 300);
         });
-        // const dateValue = document.getElementById('tanggal-hidden');
-        // const dateDisplay = document.getElementById('tanggal');
-        // myDatePicker(dateDisplay, dateValue)
     });
+
 </script>
+<?php 
+
+
+?>
 </html>

@@ -336,7 +336,7 @@
                 </tbody>
             </table>
             <div class="page">
-                <p>Halaman Sekarang: <?=$halamansekarang+1 ?></p>
+                <p>Halaman: <?=$halamansekarang+1 ?> dari <?=$jumlahhalaman?></p>
                 <p >Page</p>
                 <p class="page-num"> <?php 
                 if (isset($jumlahhalaman)) {

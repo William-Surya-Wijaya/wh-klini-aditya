@@ -92,7 +92,7 @@ function getPageData($value){
 
 function pageNum($value){
     include("koneksi.php");
-    $result = mysqli_query($koneksi,"select count(*) from user where deleted_at is null and nama like '%".$value["nama"]."%'");
+    $result = mysqli_query($koneksi,"select id_user from user where deleted_at is null and nama like '%".$value["nama"]."%'");
     $total = mysqli_num_rows($result);
     $pages = ceil($total/10);
     return $pages;

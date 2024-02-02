@@ -66,7 +66,7 @@ function getPagejenisData($value){
 
 function pagejenisNum($value){
     include("koneksi.php");
-    $result = mysqli_query($koneksi,"select count(*) from jenis where deleted_at is null and jenis like '%".$value["jenis"]."%'");
+    $result = mysqli_query($koneksi,"select id_jenis from jenis where deleted_at is null and jenis like '%".$value["jenis"]."%'");
     $total = mysqli_num_rows($result);
     $pages = ceil($total/10);
     return $pages;

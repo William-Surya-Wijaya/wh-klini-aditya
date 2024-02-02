@@ -67,7 +67,7 @@ function getPageroleData($value){
 
 function pageroleNum($value){
     include("koneksi.php");
-    $result = mysqli_query($koneksi,"select count(*) from role where deleted_at is null and role like '%".$value["role"]."%'");
+    $result = mysqli_query($koneksi,"select id_role from role where deleted_at is null and role like '%".$value["role"]."%'");
     $total = mysqli_num_rows($result);
     $pages = ceil($total/10);
     return $pages;

@@ -48,7 +48,7 @@
     .login-section {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         align-items: center;
         gap: 20px;
         width: 100%;
@@ -63,7 +63,7 @@
         gap: 15px;
         color: black;
     }
-    /* .login-button{
+    /* .search-button{
         background-color: cornflowerblue;
         border: 2px solid cornflowerblue;
         color: white;
@@ -179,12 +179,13 @@
         padding: 20px 0px 10px;
         width: 100%;
     }
-    /* form {
+    form {
         width: 100%;
         align-items: right;
         display: flex;
+        flex-direction: column;
 
-    } */
+    }
 
     table {
         z-index: 1;
@@ -266,6 +267,7 @@
         text-align: center;
         padding-top: 5%;
     }
+    
 
     /* .login-section {
         display: flex;
@@ -276,7 +278,6 @@
         width: 30%;
     } */
 
-
     .page-num {
         justify-content: space-between;
     }
@@ -286,10 +287,12 @@
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- <script src="./myDatePicker/mydatepicker.js"></script> -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Klinik Aditya</title>
 </head>
 <body>
@@ -301,49 +304,117 @@
             <div class="character-table-title">
                 <p class="table-title">Trans Data</p>
             </div>
-            <div class="table-header">
-                <!-- <a class="add-character" href="route.php?action=new-trans">Add</a> -->
-                <div class="login-section">
-                <form method="post" id="tambah-trans" name="tambah-trans" >
-                    <div class="input-section">
-                        <label>Tanggal</label>
-                        <input type="date" id="tanggal" name="tanggal" class="tanggalinputbox">
-                        <!-- <input type="hidden" id="tanggal-hidden" name="tanggal-hidden"> -->
-                        <label>Total</label>
-                        <input type="text" id="total" name="total" readonly>
-                        <label>Total Qty</label>
-                        <input type="text" id="qty" name="qty" readonly>
+            <!-- <form method="post" id="tambah-trans" name="tambah-trans" action="./route.php?action=tambah-trans"> -->
+                <div class="table-header">
+                    <div class="login-section">
+                        <div class="input-section">
+                            <label>Tanggal Awal</label>
+                            <input type="date" id="tanggal_awal" name="tanggal_awal" class="tanggalinputbox" value="<?php echo date('d-m-Y'); ?>"/>
+                            <input type="hidden" id="nomorIndex" name="nomorIndex" readonly >  
+                            <label>Tanggal Akhir</label>
+                            <input type="date" id="tanggal_akhir" name="tanggal_akhir" class="tanggalinputbox" value="<?php echo date('d-m-Y'); ?>">  
+
+                        </div>
+                        <div class="search-button">
+                            <button id="searchclickbutton">Search</button>
+                        </div> 
+                        <div class="add-button">
+                            <a href="route.php?action=new-trans">
+                                <button id="addclickbutton">Add Data</button>
+                            </a>
+                        </div> 
+                        
                     </div>
-                    <div class="login-button">
-                        <button id="loginclickbutton">Tambah</button>
-                        <!-- <input type="submit" value="Login"> -->
-                    </div> 
-                </form>
-            </div>
                     <!-- <div class="input-section"> 
                         <input type="text" id="search-input" name="search-input" placeholder="Search" value="<?php echo isset($_GET['id_trans'])? $_GET['id_trans'] :  '';?>">
                         <button  onclick="searchTData()">Search</button>
                     </div> -->
-            </div>
-            <table class="character-table" border="1" cellpadding="0" cellspacing="0">
-                <thead>
+                </div>
+                
+                <table class="character-table" border="1" cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr class="tr-table">
+                            <th width="2%">#</th>
                             <th width="5%">No</th>
-                            <th width="15%">Obat</th>
-                            <th width="8%">Qty</th>
-                            <th width="10%">Harga</th>
-                            <th width="10%">Subtotal</th>
+                            <th width="15%">Id Trans</th>
+                            <th width="8%">Tanggal</th>
+                            <th width="10%">Total Qty</th>
+                            <th width="10%">Total</th>
                             <th width="5%">Delete</th>
-                            <!-- <th width="5%">Modify</th> -->
+                            <th width="5%">Modify</th>
                             <!-- <th width="10%">Jenis</th> -->
                         </tr>
-                </thead>
-                <tbody id="tableBody" class="table-body"></tbody>
-            </table>
+                    </thead>
+                    <tbody id="tableBody" class="table-body">
+                        <?php 
+                        $no = 1;
+                        while($getData = mysqli_fetch_array($result)){
+                            ?>
+                            <tr>
+                                <th width="2%">
+                                    <div class="droptable" id="droptable">
+                                        <!-- <button id="dropdown-button" onclick="showDetail('<?php echo $getData['id_trans']; ?>')">  -->
+                                        <button class="dropdown-button" id="dropdown-button" name="<?= $getData['id_trans'] ?>" onclick="DetailData(this,'<?= $getData['id_trans']; ?>')"> 
+                                            <i class="fa fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                                <th width="5%"><?php echo $no++; ?></th>
+                                <th width="15%"><?php echo $getData['id_trans']; ?></th>
+                                <th width="20%"><?php 
+                                $orgDate = $getData['tanggal']; 
+                                $newDate = date("d-m-Y", strtotime($orgDate));
+                                echo $newDate;
+                                ?></th>
+                                <th width="10%"><?php echo number_format($getData['total_qty'], 0, ' ','.'); ?></th>
+                                <th width="10%"><?php echo number_format($getData['total'], 0 , ' ', '.'); ?></th>
+                                <th width="5%"><button onclick="deleteTransData('<?php echo $getData['id_trans']; ?>')">Delete</button></th>
+                                <th width="5%"><button onclick="modifyTransData('<?php echo $getData['id_trans']; ?>')">Edit</button></th>
 
-            </div>
+                            </tr>
+                            <!-- <tr class="detail-data" id="detail-<?php echo $getData['id_trans']; ?>" style="display: none;">
+                                <th width="5%" colspan="2">ID det</th>
+                                <th width="10%" >ID trans</th>
+                                <th width="10%" >Obat</th>
+                                <th width="10%">Qty</th>
+                                <th width="10%">Harga</th>
+                                <th width="5%" colspan="4">Subtotal</th>
+                            </tr> -->
+                            <!-- <tr class="detail-data-obat" id="detail-obat-<?php echo $getData['id_trans']; ?>" style="display: none;" > -->
+                                <!-- <td width="5%" colspan="2"><?php echo $getData['id_obat']; ?></td> -->
+                                <!-- <td width="10%"><?php echo $getData['qty']; ?></td> -->
+                                <!-- <th width="10%"><?php echo $getData['harga']; ?></th> -->
+                                <!-- <th width="10%" colspan="4"><?php echo $getData['subtotal']; ?></th> -->
+                            <!-- </tr> -->
+                            <!-- <tr class="detailRow" style="display:none;">
+                                <td colspan="8" class="detailCell">
 
-        </div>
+                                </td>
+                            </tr> -->
+                        <?php
+                        };
+                        ?>
+                    </tbody>
+                </table>
+                <div class="page">
+                    <p>Halaman Sekarang: <?=$halamansekarang+1 ?></p>
+                    <p >Page</p>
+                    <p class="page-num"> <?php 
+                    if (isset($jumlahhalaman)) {
+                        for($i=0; $i< $jumlahhalaman;  $i++){
+                        ?><a href='./route.php?action=trans-data&halaman=<?=$i?>&tanggal_awal=<?= isset($_GET['tanggal_awal'])? $_GET['tanggal_awal']: date('d-m-Y') ?>&tanggal_akhir=<?= isset($_GET['tanggal_akhir'])? $_GET['tanggal_akhir']: date('d-m-Y') ?>'><?=$i+1?></a> <?php 
+                        }
+                    } else {
+                        echo "Error ";
+                    }
+                        ?> </p>
+                </div>
+                <!-- <button type="button" onclick = "save()" class="saveclickbutton" id="saveclickbutton">Save</button> -->
+            <!-- </form> -->
+        
+    </div>
+    
+</div>
 
     </div>
 </div>
@@ -352,134 +423,32 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
+    // const datenow = document.getElementById('tanggal_awal').valueAsDate = new date();
     const characterTable = document.getElementById('tableBody');
-    // const tanggalInput = document.getElementById('tanggal');
-    // const totalInput = document.getElementById('total');
-    // const qtyInput = document.getElementById('qty');
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-            const loginButton = document.getElementById('loginclickbutton')
-            loginButton.addEventListener('click', (event)=>{
-                event.preventDefault();
-                Swal.fire({
-                    title: "Success",
-                    text: "Added a New Data",
-                    icon: "success"
-                });
-                addCharacter();
-            });
-    });
-    // const formRegister = document.getElementById('tableBody');
     let tableIndex = 1;
-    function addCharacter(number, obat, qty, harga, subtotal, deleteF){
+    function addCharacter(number, id_trans, tanggal, total_qty, total_harga , deleteF, modify){
         const newRow = document.createElement('tr');
         const newCol = document.createElement('td');
-        newCol.textContent = tableIndex;
-        
-        const newObat = document.createElement('td');
-        const newObatInput = document.createElement('input');
-        
-        newObatInput.type = 'text';
-        newObatInput.autocomplete = 'off';
-        newObatInput.name = 'newObatInput'+tableIndex;
-        newObatInput.id = 'newObatInput'+tableIndex;
-        newObatInput.classList.add('autoobatdata') ;
-        newObat.appendChild(newObatInput);
-        
-        // autoObatData();
-        // newObat.innerHTML = obat.value;
-        
-        const newqty = document.createElement('td');
-        const newqtyInput = document.createElement('input');
-        newqtyInput.type = 'text';
-        newqtyInput.name = 'newqtyInput'+tableIndex;
-        newqtyInput.id = 'newqtyInput'+tableIndex;
-        newqty.appendChild(newqtyInput);
-        // newqty.innerHTML = qty.value;
-        
-        const newHarga = document.createElement('td');
-        const newHargaInput =document.createElement('input');
-        newHargaInput.type = 'text';
-        newHargaInput.name = 'newHargaInput';
-        newHargaInput.id = 'newHargaInput'+tableIndex;
-        newHargaInput.readOnly = true;
-        newHarga.appendChild(newHargaInput);
-        
-        // newHarga.innerHTML = harga.value;
-        
-        const newSubtotal = document.createElement('td');
-        const newSubtotalInput =document.createElement('input');
-        newSubtotalInput.type = 'text';
-        newSubtotalInput.readOnly = true;
-        newSubtotalInput.name = 'newSubtotalInput';
-        newSubtotalInput.id = 'newSubtotalInput'+tableIndex;
-        newSubtotal.appendChild(newSubtotalInput);
+        newCol.innerHTML = number;
 
-        $(newqtyInput).keyup(function(e){
-           var subtotal= newHargaInput.value * this.value;
-           newSubtotalInput.value = subtotal;
-        });
+        const newIdtrans = document.createElement('td');
+        newIdtrans.innerHTML = id_trans.value;
 
+        const newTanggal = document.createElement('td');
+        newTanggal.innerHTML = tanggal.value;
 
-        $(newObatInput).autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-auto-obat",
-                    dataType: "json",
-                    data: {
-                        term: request.term
-                    },
-                    success: function(data) {
-                        response(data);
-                    }
-                });
-            },
-             minLength: 1,
-                    select: function(event, ui) {
-                        $.ajax({
-                            url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-harga-auto-obat&"+newHargaInput.value,
-                            dataType: "json",
-                            data: {
-                                term: ui.item.value
-                            },
-                            success: function(data) {
-                                // alert(tableIndex);
-                                $('#newHargaInput'+(tableIndex-1)).val(data);
-                                $('#newqtyInput'+(tableIndex-1)).val('1');
-                                $('#newSubtotalInput'+(tableIndex-1)).val(data);
-                                
-                            },
-                        });
-                        
-                        // $.ajax({
-                        //     url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-qty-auto-obat&"+newqtyInput.value,
-                        //     dataType: "json",
-                        //     data: {
-                        //         term: ui.item.value
-                        //     },
-                        //     success: function(data) {
-                        //         // alert(tableIndex);
-                        //         $('#newqtyInput'+(tableIndex-1)).val(data);
-                        //     },
-                        // });
-
-                        // $.ajax({
-                        //     url: "http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=subtotal-auto-obat&"+newSubtotalInput.value,
-                        //     dataType: "json",
-                        //     data: {
-                        //         term: ui.item.value
-                        //     },
-                        //     success: function(data) {
-                        //         // alert(tableIndex);
-                        //         $('#newSubtotalInput'+(tableIndex-1)).val(data);
-                        //     }
-                        // });
-                // Koding disini mau ngapain, bisa ajax sekali lagi untuk ambil harga barang tersebut
-                console.log("Selected: " + ui.item.value);
-                }
-        });
+        const newTotalqty = document.createElement('td');
+        newTotalharga.innerHTML = total_qty.value;
         
+        const newTotalharga = document.createElement('td');
+        newTotalharga.innerHTML = total_harga.value;
+
+        // const newLastmodified = document.createElement('td');
+        // newLastmodified.innerHTML = last_modified.value;
+
+        const newModify = document.createElement('td');
+        newLastmodified.innerHTML = modify.value;
+
         const newDelete = document.createElement('td');
         const newdeleteButton = document.createElement('DButton')
         newdeleteButton.classList.add('tButton');
@@ -500,81 +469,167 @@
                 confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "No, cancel!",
                 reverseButtons: true
-            }).then((result) => {
+                }).then((result) => {
                 if (result.isConfirmed) {
                     newRow.remove();
                     swalWithBootstrapButtons.fire({
-                        title: "Deleted!",
-                        text: `Row has been deleted`,
-                        icon: "success"
+                    title: "Deleted!",
+                    text: `Data ${newIdtrans.innerHTML} has been deleted`,
+                    icon: "success"
                     });
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire({
-                            title: "Cancelled",
+                ) {
+                    swalWithBootstrapButtons.fire({
+                    title: "Cancelled",
                     text: "Nothing Changed",
                     icon: "error"
-                });
-            }
+                    });
+                }
             });
             
         });
-        
-        // const loginButton = document.getElementById('loginclickbutton');
-        
-  
-        
-    
-    newDelete.appendChild(newdeleteButton);
-    
-    newRow.appendChild(newCol);
-    newRow.appendChild(newObat);
-    newRow.appendChild(newqty);
-    newRow.appendChild(newHarga);
-    newRow.appendChild(newSubtotal);
-    newRow.appendChild(newDelete);
-    // newRow.appendChild(newLastmodified);
-    // newRow.appendChild(newModify);
-    
-    characterTable.appendChild(newRow);
-    tableIndex++;
-}
-    function autoObatData(idInput) {
-        // console.log(`#${idInput}`);
-        
-    };
-    function autoObatData(idInput) {
-        // console.log(`#${idInput}`);
-        
-    };
+        newDelete.appendChild(newdeleteButton);
 
-    // function modifyData(id){
-    //    location.href="./route.php?action=modify-trans&id=" + id;
-    //     // alert('error'); 
-    // }
-    // function deleteData(id){
-    //    location.href="./route.php?action=delete-trans&id=" + id;
-    //     // alert('error'); 
-    // };
-    // function searchTData(){
-    //     const nilai_search = document.getElementById("search-input").value;
-    //     location.href="./route.php?action=trans-data&id_trans=" + nilai_search;
-    //     // alert('error'); 
-    // };
+        newRow.appendChild(newCol);
+        newRow.appendChild(newIdtrans);
+        newRow.appendChild(newTanggal);
+        newRow.appendChild(newTotalqty);
+        newRow.appendChild(newTotalharga);
+        // newRow.appendChild(newLastmodified);
+        newRow.appendChild(newDelete);
+        newRow.appendChild(newModify);
 
+        characterTable.appendChild(newRow);
+    }
+
+    const searchTanggal = document.getElementById('searchclickbutton');
+    const tanggalawalInput = document.getElementById('tanggal_awal');
+    const tanggalakhirInput = document.getElementById('tanggal_akhir');
+    searchTanggal.addEventListener('click', function(event){
+        event.preventDefault();
+        // function searchTData(){
+            const nilai_search_awal = document.getElementById("tanggal_awal").value;
+            const nilai_search_akhir = document.getElementById("tanggal_akhir").value;
+            if (nilai_search_awal != '' && nilai_search_akhir == ''){
+                location.href="./route.php?action=trans-data&tanggal_awal=" + nilai_search_awal;
+                
+            } else if (nilai_search_akhir != '' && nilai_search_awal == ''){
+                location.href="./route.php?action=trans-data&tanggal_akhir=" + nilai_search_akhir;
+                
+            } else if (nilai_search_akhir != '' && nilai_search_awal != ''){
+                location.href="./route.php?action=trans-data&tanggal_awal=" + nilai_search_awal +"&tanggal_akhir="+ nilai_search_akhir;
     
+            } else {
+                alert("Tolong isi tanggal terlebih dahulu!")
+            };
+            // alert('error'); 
+        // }
+        
+    });
+    tanggalawalInput.value = "<?= isset($_GET['tanggal_awal'])? $_GET['tanggal_awal']: date('d-m-Y');?>"
+    tanggalakhirInput.value = "<?= isset($_GET['tanggal_akhir'])? $_GET['tanggal_akhir']: date('d-m-Y');?>"
+    function deleteTransData(id){
+       location.href="./route.php?action=delete-trans&id=" + id;
+        // alert('error'); 
+    }
+    function modifyTransData(id){
+       location.href="./route.php?action=modify-trans&id=" + id;
+        // alert('error'); 
+    }
+
+    function DetailData(button, id_master) {
+        
+        if(button.getAttribute('detail-show') === 'true'){
+            // var detailShown = button.getAttribute('detail-show');
+            var newRow = document.getElementById('detailRow'+ id_master);
+            if(newRow) {
+                newRow.style.display = newRow.style.display === 'none'? '':'none';
+            } else {
+                console.error('Element with id detailRow ' + id_master + ' does not exist.');
+            }
+            return;
+
+        }
+        var tableContain = button.closest('tr');
+        var table = tableContain.closest('table');
+        var detailRow = table.insertRow(tableContain.rowIndex+1);
+        detailRow.setAttribute('id','detailRow'+id_master);
+
+        var detailCol =detailRow.insertCell(0);
+        detailCol.colSpan = tableContain.cells.length;
+
+        button.setAttribute('detail-show','true');
+
+        getDetaildata(id_master, detailCol);
+    } 
+
+    function getDetaildata(id_master, detailCol){
+        fetch('http://localhost/wh-klini-aditya/Klinik%20-%20Admin/route.php?action=search-trans-detail&id_master=' + id_master)
+        .then(response => response.json())
+        .then(data => {
+            console.log(JSON.parse(data));
+            var newTableData = `
+                <table class="table-detail" style="border:1px solid black; width:100%;">
+                    <thead >
+                        <tr>
+                            <th width="5%" colspan="2" style="border:1px solid black;" >ID det</th>
+                            <th width="10%" style="border:1px solid black;">ID trans</th>
+                            <th width="10%" style="border:1px solid black;">Obat</th>
+                            <th width="10%" style="border:1px solid black;">Qty</th>
+                            <th width="10%" style="border:1px solid black;">Harga</th>
+                            <th width="5%" colspan="2" style="border:1px solid black;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                    let hasil = JSON.parse(data);
+            if (Array.isArray(hasil)) {
+                if (hasil == ''){
+                    newTableData += '<tr><td colspan="100%">No detail data available</td></tr>';
+                } else {
+                    hasil.forEach(row => {
+                        newTableData += `
+                            <tr>
+                                <td width="5%" colspan="2" style="border:1px solid black;">${row.id_det}</td>
+                                <td width="10%" style="border:1px solid black;">${row.id_trans}</td>
+                                <td width="10%" style="border:1px solid black;">${row.nama_obat}</td>
+                                <td width="10%" style="border:1px solid black;">${row.qty}</td>
+                                <td width="10%" style="border:1px solid black;">${row.harga}</td>
+                                <td width="5%" colspan="4" style="border:1px solid black;">${row.subtotal}</td>
+                            </tr>
+                            `;
+                        });
+
+                }
+            } else {
+                newTableData += '<tr><td colspan="100%">No detail data available</td></tr>';
+                console.error('Data received is not an array:', error);
+            }
+            
+            newTableData += '</tbody></table>';
+            detailCol.innerHTML = newTableData;
+                
+            })
+        .catch(error => {
+            console.error('Error Loading Details', error);
+        });
+    }
+
+
+
     document.addEventListener("DOMContentLoaded", ()=> {
         setTimeout(() => {
             document.querySelector(".loader-section").classList.add("loader-hidden");
             // document.querySelector(".loader-section").addEventListener("transitionend", ()=> {
-            //     document.body.removeChild(document.querySelector(".loader-section"));
-            
+                //     document.body.removeChild(document.querySelector(".loader-section"));
+                
             // }, 300);
         });
-    });
 
+        
+    });
+    
 </script>
 <?php 
 
